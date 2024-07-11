@@ -1,0 +1,41 @@
+// For more details, see https://aka.ms/devcontainer.json.
+{
+  "name": "Fastlane",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/",
+  "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+  "postCreateCommand": "npm install",
+  "postAttachCommand": {
+    "Start server": "CI=true npx kill-port --yes 8888 && npm start"
+  },
+  "forwardPorts": [8888],
+  "portsAttributes": {
+    "8888": {
+      "label": "Preview of Fastlane Flow",
+      "onAutoForward": "openBrowser"
+    }
+  },
+  "secrets": {
+    "PAYPAL_CLIENT_ID": {
+      "description": "Sandbox client ID of the application.",
+      "documentationUrl": "https://developer.paypal.com/dashboard/applications/sandbox"
+    },
+    "PAYPAL_CLIENT_SECRET": {
+      "description": "Sandbox secret of the application.",
+      "documentationUrl": "https://developer.paypal.com/dashboard/applications/sandbox"
+    }
+  },
+  "containerEnv": {
+    "BASE_URL": "https://api-m.sandbox.paypal.com"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": ["vsls-contrib.codetour", "PayPal.vscode-paypal"],
+      "settings": {
+        "git.openRepositoryInParentFolders": "always",
+        "files.exclude": {
+          "**/.devcontainer": true
+        }
+      }
+    }
+  }
+}
