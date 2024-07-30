@@ -1,0 +1,165 @@
+/* Sample application styles for demo purposes -- not required for Fastlane */
+
+body {
+  background-color: #faf8f5;
+  font-family: 'paypal-open', sans-serif, system-ui;
+}
+
+button {
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:disabled {
+  cursor: wait;
+}
+
+fieldset {
+  border: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 16px 0;
+  padding: 0;
+}
+
+form {
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 32px;
+  width: min(640px, 100%);
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: normal;
+  line-height: 30px;
+  margin: 0;
+  text-align: center;
+}
+
+h2 {
+  color: #001435;
+  font-size: 22px;
+  font-weight: normal;
+  line-height: 28px;
+  margin: 0;
+}
+
+hr {
+  border: 1px solid #dbdde0;
+  width: 100%;
+}
+
+hr:has(+ section[hidden]) {
+  display: none;
+}
+
+input[type="checkbox"] {
+  margin: 8px;
+  transform: scale(1.5);
+}
+
+input:not([type="checkbox"]) {
+  border: 1px solid #929496;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 18px;
+  height: 48px;
+  line-height: 24px;
+  padding: 8px 12px 8px 12px;
+}
+
+*:has(#shipping-required-checkbox:not(:checked)) ~ input {
+  display: none;
+}
+
+section {
+  margin: 32px 0;
+}
+
+section.active .edit-button:not(.pinned) {
+  display: none;
+}
+
+section.active .summary {
+  display: none;
+}
+
+section.pinned .edit-button:not(.pinned) {
+  display: none;
+}
+
+section.pinned .summary {
+  display: none;
+}
+
+section:not(.active, .pinned) fieldset {
+  display: none;
+}
+
+section:not(.active, .pinned) .submit-button {
+  display: none;
+}
+
+section:not(.visited) .edit-button {
+  display: none;
+}
+
+.edit-button {
+  background-color: initial;
+  border: 2px solid #003087;
+  box-sizing: border-box;
+  color: #003087;
+  font-size: 14px;
+  font-weight: 700;
+  gap: 6px;
+  height: 32px;
+  line-height: 20px;
+  padding: 0px 16px 0px 16px;
+}
+
+.email-container {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  width: 100%;
+}
+
+.email-input-with-watermark {
+  flex: auto;
+  margin: 0;
+}
+
+.header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 16px 0;
+}
+
+.submit-button:not([hidden]) {
+  background-color: #003087;
+  border: none;
+  color: #ffffff;
+  display: block;
+  font-size: 18px;
+  height: 48px;
+  line-height: 24px;
+  margin: 0 auto;
+  padding: 12px 32px 12px 32px;
+}
+
+.submit-button:disabled {
+  background-color: #dbdde0;
+}
+
+#payment:not(.active, .pinned) ~ #checkout-button {
+  display: none;
+}
+
+#watermark-container {
+  align-self: flex-end;
+  min-height: 24px;
+}

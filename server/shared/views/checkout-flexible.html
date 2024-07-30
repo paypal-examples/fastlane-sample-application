@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <title>{{title}}</title>
+
+  <head>
+    <link rel="stylesheet" href="{{stylesheetPath}}" />
+
+    {{&prerequisiteScripts}}
+    <script src="{{initScriptPath}}" defer></script>
+  </head>
+
+  <body>
+    <form>
+      <h1>{{title}}</h1>
+
+      <section id="customer" class="active visited">
+        <div class="header">
+          <h2>Customer</h2>
+          <button id="email-edit-button" type="button" class="edit-button">Edit</button>
+        </div>
+        <div class="summary"></div>
+        <div class="email-container">
+          <fieldset class="email-input-with-watermark">
+            <input id="email-input" name="email" type="email" placeholder="Email" autocomplete="email" />
+            <div id="watermark-container"></div>
+          </fieldset>
+          <button id="email-submit-button" type="button" class="submit-button" disabled>Continue</button>
+        </div>
+      </section>
+      
+      <hr />
+      
+      <section id="shipping">
+        <div class="header">
+          <h2>Shipping</h2>
+          <button id="shipping-edit-button" type="button" class="edit-button">Edit</button>
+        </div>
+        <div class="summary"></div>
+        <fieldset>
+          <span>
+            <input id="shipping-required-checkbox" name="shipping-required" type="checkbox" checked />
+            <label for="shipping-required-checkbox">This purchase requires shipping</label>
+          </span>
+          <input name="given-name" placeholder="First name" autocomplete="given-name" />
+          <input name="family-name" placeholder="Last name" autocomplete="family-name" />
+          <input name="shipping-address-line1" placeholder="Street address" autocomplete="address-line1" />
+          <input name="shipping-address-line2" placeholder="Apt., ste., bldg. (optional)" autocomplete="address-line2" />
+          <input name="shipping-address-level2" placeholder="City" autocomplete="address-level2" />
+          <input name="shipping-address-level1" placeholder="State" autocomplete="address-level1" />
+          <input name="shipping-postal-code" placeholder="ZIP code" autocomplete="postal-code" />
+          <input name="shipping-country" placeholder="Country" autocomplete="country" />
+          <input name="tel-country-code" placeholder="Country calling code" autocomplete="tel-country-code" />
+          <input name="tel-national" type="tel" placeholder="Phone number" autocomplete="tel-national" />
+        </fieldset>
+        <button id="shipping-submit-button" type="button" class="submit-button">Continue</button>
+      </section>
+      
+      <hr />
+      
+      <section id="billing">
+        <div class="header">
+          <h2>Billing</h2>
+          <button id="billing-edit-button" type="button" class="edit-button">Edit</button>
+        </div>
+        <div class="summary"></div>
+        <fieldset>
+          <input name="billing-address-line1" placeholder="Street address" autocomplete="address-line1" />
+          <input name="billing-address-line2" placeholder="Apt., ste., bldg. (optional)" autocomplete="address-line2" />
+          <input name="billing-address-level2" placeholder="City" autocomplete="address-level2" />
+          <input name="billing-address-level1" placeholder="State" autocomplete="address-level1" />
+          <input name="billing-postal-code" placeholder="ZIP code" autocomplete="postal-code" />
+          <input name="billing-country" placeholder="Country" autocomplete="country" />
+        </fieldset>
+        <button id="billing-submit-button" type="button" class="submit-button">Continue</button>
+      </section>
+
+      <hr />
+
+      <section id="payment">
+        <div class="header">
+          <h2>Payment</h2>
+          <button id="payment-edit-button" type="button" class="edit-button">Edit</button>
+        </div>
+        <fieldset>
+          <div id="selected-card"></div>
+          <div id="payment-watermark"></div>
+          <div id="card-component"></div>
+        </fieldset>
+      </section>
+
+      <button id="checkout-button" type="button" class="submit-button">Checkout</button>
+    </form>
+  </body>
+</html>

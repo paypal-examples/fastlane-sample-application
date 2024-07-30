@@ -1,0 +1,5 @@
+flask
+load_dotenv
+flask_cors
+requests
+chevron

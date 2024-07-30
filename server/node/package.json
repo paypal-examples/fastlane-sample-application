@@ -1,0 +1,17 @@
+{
+  "name": "fastlane-sample-application",
+  "version": "1.0.0",
+  "description": "Sample Node.js web app using PayPal's REST APIs to integrate Fastlane for online payments",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "license": "Apache-2.0",
+  "dependencies": {
+    "consolidate": "^1.0.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mustache": "^4.2.0"
+  }
+}
