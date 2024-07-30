@@ -57,3 +57,6 @@ Fastlane Flexible Integration allows you to customize and style your payment pag
 #### Key Features
 - Further customize the behavior and experience of your checkout
 - Data Security: Flexible Integration is PCI DSS compliant, ensuring that customer payment information is handled securely
+
+## Codespaces
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application)
