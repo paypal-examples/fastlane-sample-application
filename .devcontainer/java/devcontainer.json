@@ -47,6 +47,6 @@
             "installMaven": "true"
         }
     },
-    "postCreateCommand": "cd /workspaces/fastlane-sample-application/server && cp .env.example java/.env && cd java && mvn clean install",
+    "postCreateCommand": "cd /workspaces/${localWorkspaceFolderBasename}/server && cp .env.example java/.env && cd java && mvn clean install",
     "postAttachCommand": "mvn spring-boot:run"
 }
