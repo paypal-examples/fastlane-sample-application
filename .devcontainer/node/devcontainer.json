@@ -1,5 +1,5 @@
 {
-    "name": "1.Node",
+    "name": "1-Node",
     "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/server/node",
     "forwardPorts": [

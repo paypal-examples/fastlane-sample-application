@@ -1,5 +1,5 @@
 {
-    "name": "4.Java",
+    "name": "4-Java",
     "image": "mcr.microsoft.com/devcontainers/java:17",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/server/java",
     "forwardPorts": [
