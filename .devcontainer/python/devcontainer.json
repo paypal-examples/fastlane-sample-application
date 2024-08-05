@@ -1,5 +1,5 @@
 {
-    "name": "3.Python",
+    "name": "3-Python",
     "image": "mcr.microsoft.com/devcontainers/python:3.10",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/server/python",
     "forwardPorts": [
