@@ -1,0 +1,21 @@
+{
+  "name": "Select backend and frontend",
+  "configurationSet": [
+    {
+      "name": "Node",
+      "folder": ".devcontainer/node"
+    },
+    {
+      "name": "Dotnet",
+      "folder": ".devcontainer/dotnet`"
+    },
+    {
+      "name": "Python",
+      "folder": ".devcontainer/python"
+    },
+    {
+      "name": "Java",
+      "folder": ".devcontainer/java"
+    }
+  ]
+}
