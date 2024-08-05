@@ -1,5 +1,5 @@
 {
-    "name": "Dotnet",
+    "name": "2.Dotnet",
     "image": "mcr.microsoft.com/devcontainers/dotnet:8.0",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/server/dotnet",
     "forwardPorts": [
