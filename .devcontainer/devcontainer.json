@@ -2,8 +2,9 @@
   "name": "Select backend and frontend",
   "configurationSet": [
     {
-      "name": "Node",
-      "folder": ".devcontainer/node"
+      "name": "Node.js + HTML",
+      "folder": ".devcontainer/node",
+      "description": "Sets up a Node.js backend serving static HTML files"
     },
     {
       "name": "Dotnet",
