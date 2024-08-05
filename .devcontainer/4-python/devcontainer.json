@@ -1,18 +1,13 @@
 {
-    "name": "2-Dotnet",
-    "image": "mcr.microsoft.com/devcontainers/dotnet:8.0",
-    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/server/dotnet",
+    "name": "Python",
+    "image": "mcr.microsoft.com/devcontainers/python:3.10",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/server/python",
     "forwardPorts": [
-        5000,
-        5001
+        8888
     ],
     "portsAttributes": {
-        "5000": {
-            "label": "Dotnet HTTP",
-            "onAutoForward": "openBrowserOnce"
-        },
-        "5001": {
-            "label": "Dotnet HTTPS",
+        "8888": {
+            "label": "Python",
             "onAutoForward": "openBrowserOnce"
         }
     },
@@ -35,11 +30,12 @@
             "extensions": [
                 "vsls-contrib.codetour",
                 "PayPal.vscode-paypal",
-                "ms-dotnettools.csharp"
+                "ms-python.python"
             ]
         },
         "settings": {
-            "git.openRepositoryInParentFolders": "always"
+            "git.openRepositoryInParentFolders": "always",
+            "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
         },
         "codespaces": {
             "openFiles": [
@@ -47,6 +43,6 @@
             ]
         }
     },
-    "postCreateCommand": "dotnet restore",
-    "postAttachCommand": "dotnet run"
+    "postCreateCommand": "python -m venv .venv && . .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt",
+    "postAttachCommand": ". .venv/bin/activate && python app.py"
 }

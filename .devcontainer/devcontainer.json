@@ -1,22 +1,3 @@
 {
-  "name": "Select backend and frontend",
-  "configurationSet": [
-    {
-      "name": "Node.js + HTML",
-      "folder": ".devcontainer/node",
-      "description": "Sets up a Node.js backend serving static HTML files"
-    },
-    {
-      "name": "Dotnet",
-      "folder": ".devcontainer/dotnet`"
-    },
-    {
-      "name": "Python",
-      "folder": ".devcontainer/python"
-    },
-    {
-      "name": "Java",
-      "folder": ".devcontainer/java"
-    }
-  ]
+  "name": "Select backend language"
 }
