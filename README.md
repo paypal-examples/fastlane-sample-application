@@ -57,3 +57,20 @@ Fastlane Flexible Integration allows you to customize and style your payment pag
 #### Key Features
 - Further customize the behavior and experience of your checkout
 - Data Security: Flexible Integration is PCI DSS compliant, ensuring that customer payment information is handled securely
+
+# PayPal Codespaces
+
+PayPal codespaces require a client ID and client secret for your app.
+
+### Link to codespaces 
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/louislowjk/fastlane-sample-application)
+
+### Learn more 
+
+You can read more about codespaces in the [PayPal Developer Docs](https://developer.paypal.com/api/rest/sandbox/codespaces).
+
+### Feedback 
+
+* To report a bug or suggest a new feature, create an [issue in GitHub](https://github.com/paypal-examples/paypaldevsupport/issues/new/choose). 
+* To submit feedback, go to [PayPal Developer Docs](https://developer.paypal.com/api/rest/sandbox/codespaces) and select the "Feedback" tab

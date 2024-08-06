@@ -1,0 +1,48 @@
+{
+    "name": "Python",
+    "image": "mcr.microsoft.com/devcontainers/python:3.10",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/server/python",
+    "forwardPorts": [
+        8888
+    ],
+    "portsAttributes": {
+        "8888": {
+            "label": "Python",
+            "onAutoForward": "openBrowserOnce"
+        }
+    },
+    "secrets": {
+        "PAYPAL_CLIENT_ID": {
+            "description": "Sandbox client ID of the application.",
+            "documentationUrl": "https://developer.paypal.com/dashboard/applications/sandbox"
+        },
+        "PAYPAL_CLIENT_SECRET": {
+            "description": "Sandbox secret of the application.",
+            "documentationUrl": "https://developer.paypal.com/dashboard/applications/sandbox"
+        }
+    },
+    "containerEnv": {
+        "PAYPAL_API_BASE_URL": "https://api-m.sandbox.paypal.com",
+        "DOMAINS": "paypal.com"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vsls-contrib.codetour",
+                "PayPal.vscode-paypal",
+                "ms-python.python"
+            ]
+        },
+        "settings": {
+            "git.openRepositoryInParentFolders": "always",
+            "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+        },
+        "codespaces": {
+            "openFiles": [
+                "README.md"
+            ]
+        }
+    },
+    "postCreateCommand": "python -m venv .venv && . .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt",
+    "postAttachCommand": ". .venv/bin/activate && python app.py"
+}
