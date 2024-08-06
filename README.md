@@ -64,7 +64,7 @@ PayPal codespaces require a client ID and client secret for your app.
 
 ### Link to codespaces 
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/louislowjk/fastlane-sample-application)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application)
 
 ### Learn more 
 
