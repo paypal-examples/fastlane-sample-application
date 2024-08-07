@@ -1,0 +1,7 @@
+# frozen_string_literal: true
+
+source 'https://rubygems.org'
+gem 'braintree', '~> 4.20.0'
+gem 'dotenv', groups: %i[development test]
+gem 'mustache', '~> 1.0'
+gem 'webrick'

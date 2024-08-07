@@ -1,0 +1,25 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    braintree (4.20.0)
+      builder (>= 3.2.4)
+      rexml (>= 3.1.9)
+    builder (3.3.0)
+    dotenv (2.8.1)
+    mustache (1.1.1)
+    rexml (3.3.2)
+      strscan
+    strscan (3.1.0)
+    webrick (1.8.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  braintree (~> 4.20.0)
+  dotenv
+  mustache (~> 1.0)
+  webrick
+
+BUNDLED WITH
+   1.17.2
