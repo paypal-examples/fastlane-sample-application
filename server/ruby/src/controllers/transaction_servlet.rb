@@ -38,6 +38,8 @@ class TransactionServlet < WEBrick::HTTPServlet::AbstractServlet
 
     response.status = 201
     response.content_type = 'application/json'
+    response.header['Access-Control-Allow-Origin'] = '*'
+    response.header['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PUT, DELETE'
     response.body = { result: json_response }.to_json
     response
   end
