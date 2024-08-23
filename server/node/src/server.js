@@ -11,6 +11,7 @@ export function configureServer(app) {
   app.set('views', '../shared/views');
 
   app.enable('strict routing');
+  //testing
 
   app.use(cors());
   app.use(express.json());
