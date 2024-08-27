@@ -1,0 +1,48 @@
+{
+    "name": "PHP",
+    "image": "mcr.microsoft.com/devcontainers/php:8",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/server/php",
+    "forwardPorts": [
+        8080
+    ],
+    "portsAttributes": {
+        "8080": {
+            "label": "PHP",
+            "onAutoForward": "openBrowserOnce"
+        }
+    },
+    "secrets": {
+        "PAYPAL_CLIENT_ID": {
+            "description": "Sandbox client ID of the application.",
+            "documentationUrl": "https://developer.paypal.com/dashboard/applications/sandbox"
+        },
+        "PAYPAL_CLIENT_SECRET": {
+            "description": "Sandbox secret of the application.",
+            "documentationUrl": "https://developer.paypal.com/dashboard/applications/sandbox"
+        }
+    },
+    "containerEnv": {
+        "PAYPAL_API_BASE_URL": "https://api-m.sandbox.paypal.com",
+        "DOMAINS": "paypal.com",
+        "PAYPAL_SDK_BASE_URL": "https://www.sandbox.paypal.com"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vsls-contrib.codetour",
+                "PayPal.vscode-paypal",
+                "xdebug.php-debug"
+            ]
+        },
+        "settings": {
+            "git.openRepositoryInParentFolders": "always"
+        },
+        "codespaces": {
+            "openFiles": [
+                "README.md"
+            ]
+        }
+    },
+    "postCreateCommand": "cd /workspaces/${localWorkspaceFolderBasename}/server && touch php/.env && cd php && composer install",
+    "postAttachCommand": "php -S localhost:8080 -t public/"
+}
