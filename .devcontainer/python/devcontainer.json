@@ -1,7 +1,7 @@
 {
     "name": "Python",
     "image": "mcr.microsoft.com/devcontainers/python:3.10",
-    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/server/python",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
         8888
     ],
@@ -23,7 +23,8 @@
     },
     "containerEnv": {
         "PAYPAL_API_BASE_URL": "https://api-m.sandbox.paypal.com",
-        "DOMAINS": "paypal.com"
+        "DOMAINS": "paypal.com",
+        "VISIBLE_FOLDER_SERVER": "python"
     },
     "customizations": {
         "vscode": {
@@ -39,10 +40,10 @@
         },
         "codespaces": {
             "openFiles": [
-                "README.md"
+                "server/python/README.md"
             ]
         }
     },
-    "postCreateCommand": "python -m venv .venv && . .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt",
-    "postAttachCommand": ". .venv/bin/activate && python app.py"
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/python && python -m venv .venv && . .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt",
+    "postAttachCommand": "cd server/python && . .venv/bin/activate && python app.py"
 }

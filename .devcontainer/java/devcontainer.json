@@ -1,7 +1,7 @@
 {
     "name": "Java",
     "image": "mcr.microsoft.com/devcontainers/java:17",
-    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/server/java",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
         8080
     ],
@@ -23,7 +23,8 @@
     },
     "containerEnv": {
         "PAYPAL_API_BASE_URL": "https://api-m.sandbox.paypal.com",
-        "DOMAINS": "paypal.com"
+        "DOMAINS": "paypal.com",
+        "VISIBLE_FOLDER_SERVER": "java"
     },
     "customizations": {
         "vscode": {
@@ -38,7 +39,7 @@
         },
         "codespaces": {
             "openFiles": [
-                "README.md"
+                "server/java/README.md"
             ]
         }
     },
@@ -48,6 +49,6 @@
             "installMaven": "true"
         }
     },
-    "postCreateCommand": "cd /workspaces/${localWorkspaceFolderBasename}/server && touch java/.env && cd java && mvn clean install",
-    "postAttachCommand": "mvn spring-boot:run"
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd /workspaces/${localWorkspaceFolderBasename}/server && touch java/.env && cd java && mvn clean install",
+    "postAttachCommand": "cd server/java && mvn spring-boot:run"
 }

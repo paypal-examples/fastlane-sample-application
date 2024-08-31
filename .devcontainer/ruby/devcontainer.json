@@ -1,7 +1,7 @@
 {
     "name": "Ruby",
     "image": "mcr.microsoft.com/devcontainers/ruby:2.7",
-    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/server/ruby",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
         4567
     ],
@@ -24,7 +24,8 @@
     "containerEnv": {
         "PAYPAL_API_BASE_URL": "https://api-m.sandbox.paypal.com",
         "DOMAINS": "paypal.com",
-        "PAYPAL_SDK_BASE_URL": "https://www.sandbox.paypal.com"
+        "PAYPAL_SDK_BASE_URL": "https://www.sandbox.paypal.com",
+        "VISIBLE_FOLDER_SERVER": "ruby"
     },
     "customizations": {
         "vscode": {
@@ -39,10 +40,10 @@
         },
         "codespaces": {
             "openFiles": [
-                "README.md"
+                "server/ruby/README.md"
             ]
         }
     },
-    "postCreateCommand": "gem install bundler:1.17.2 && bundle _1.17.2_ install --path vendor/bundle",
-    "postAttachCommand": "bundle exec ruby src/server.rb"
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/ruby && gem install bundler:1.17.2 && bundle _1.17.2_ install --path vendor/bundle",
+    "postAttachCommand": "cd server/ruby && bundle exec ruby src/server.rb"
 }
