@@ -1,0 +1,62 @@
+{
+    "name": "Vue + Python",
+    "image": "mcr.microsoft.com/devcontainers/python:3.10",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    "forwardPorts": [
+        8888,
+        5173
+    ],
+    "portsAttributes": {
+        "8888": {
+            "label": "Python",
+            "onAutoForward": "openBrowserOnce"
+        },
+        "5173": {
+            "label": "Vue",
+            "onAutoForward": "openBrowserOnce"
+        }
+    },
+    "secrets": {
+        "PAYPAL_CLIENT_ID": {
+            "description": "Sandbox client ID of the application.",
+            "documentationUrl": "https://developer.paypal.com/dashboard/applications/sandbox"
+        },
+        "PAYPAL_CLIENT_SECRET": {
+            "description": "Sandbox secret of the application.",
+            "documentationUrl": "https://developer.paypal.com/dashboard/applications/sandbox"
+        }
+    },
+    "containerEnv": {
+        "PAYPAL_API_BASE_URL": "https://api-m.sandbox.paypal.com",
+        "DOMAINS": "paypal.com",
+        "VISIBLE_FOLDER_SERVER": "python",
+        "VISIBLE_FOLDER_CLIENT": "vue"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vsls-contrib.codetour",
+                "PayPal.vscode-paypal",
+                "ms-python.python",
+                "Vue.volar",
+                "Vue.vscode-typescript-vue-plugin"
+            ]
+        },
+        "settings": {
+            "git.openRepositoryInParentFolders": "always",
+            "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+        },
+        "codespaces": {
+            "openFiles": [
+                "README.md"
+            ]
+        }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "lts"
+        }
+    },
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/python && python -m venv .venv && . .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt && cd /workspaces/${localWorkspaceFolderBasename}/client/vue && npm install",
+    "postAttachCommand": "cd server/python && . .venv/bin/activate && python app.py & cd /workspaces/${localWorkspaceFolderBasename}/client/vue && npm run dev"
+}
