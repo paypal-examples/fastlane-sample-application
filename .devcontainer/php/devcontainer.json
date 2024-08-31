@@ -1,7 +1,7 @@
 {
     "name": "PHP",
     "image": "mcr.microsoft.com/devcontainers/php:8",
-    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/server/php",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
         8080
     ],
@@ -24,7 +24,8 @@
     "containerEnv": {
         "PAYPAL_API_BASE_URL": "https://api-m.sandbox.paypal.com",
         "DOMAINS": "paypal.com",
-        "PAYPAL_SDK_BASE_URL": "https://www.sandbox.paypal.com"
+        "PAYPAL_SDK_BASE_URL": "https://www.sandbox.paypal.com",
+        "VISIBLE_FOLDER_SERVER": "php"
     },
     "customizations": {
         "vscode": {
@@ -39,10 +40,10 @@
         },
         "codespaces": {
             "openFiles": [
-                "README.md"
+                "server/php/README.md"
             ]
         }
     },
-    "postCreateCommand": "cd /workspaces/${localWorkspaceFolderBasename}/server && touch php/.env && cd php && composer install",
-    "postAttachCommand": "php -S localhost:8080 -t public/"
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd /workspaces/${localWorkspaceFolderBasename}/server && touch php/.env && cd php && composer install",
+    "postAttachCommand": "cd server/php && php -S localhost:8080 -t public/"
 }
