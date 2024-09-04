@@ -1,0 +1,55 @@
+{
+    "name": "Angular + Java",
+    "image": "mcr.microsoft.com/devcontainers/java:17",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    "forwardPorts": [
+        8080
+    ],
+    "portsAttributes": {
+        "8080": {
+            "label": "Java",
+            "onAutoForward": "openBrowserOnce"
+        }
+    },
+    "secrets": {
+        "PAYPAL_CLIENT_ID": {
+            "description": "Sandbox client ID of the application.",
+            "documentationUrl": "https://developer.paypal.com/dashboard/applications/sandbox"
+        },
+        "PAYPAL_CLIENT_SECRET": {
+            "description": "Sandbox secret of the application.",
+            "documentationUrl": "https://developer.paypal.com/dashboard/applications/sandbox"
+        }
+    },
+    "containerEnv": {
+        "PAYPAL_API_BASE_URL": "https://api-m.sandbox.paypal.com",
+        "DOMAINS": "paypal.com",
+        "VISIBLE_FOLDER_SERVER": "java",
+        "VISIBLE_FOLDER_CLIENT": "angular"
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "vsls-contrib.codetour",
+                "PayPal.vscode-paypal",
+                "vscjava.vscode-java-pack"
+            ]
+        },
+        "settings": {
+            "git.openRepositoryInParentFolders": "always"
+        },
+        "codespaces": {
+            "openFiles": [
+                "README.md"
+            ]
+        }
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/java:1": {
+            "version": "17",
+            "installMaven": "true"
+        }
+    },
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd /workspaces/${localWorkspaceFolderBasename}/server && touch java/.env && cd java && mvn clean install",
+    "postAttachCommand": "cd server/java && mvn spring-boot:run"
+}
