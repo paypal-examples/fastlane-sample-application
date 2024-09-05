@@ -1,5 +1,5 @@
 {
-    "name": "PHP",
+    "name": "HTML + PHP",
     "image": "mcr.microsoft.com/devcontainers/php:8",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
@@ -25,7 +25,8 @@
         "PAYPAL_API_BASE_URL": "https://api-m.sandbox.paypal.com",
         "DOMAINS": "paypal.com",
         "PAYPAL_SDK_BASE_URL": "https://www.sandbox.paypal.com",
-        "VISIBLE_FOLDER_SERVER": "php"
+        "VISIBLE_FOLDER_SERVER": "php",
+        "VISIBLE_FOLDER_CLIENT": "html"
     },
     "customizations": {
         "vscode": {
@@ -40,7 +41,7 @@
         },
         "codespaces": {
             "openFiles": [
-                "server/php/README.md"
+                "README.md"
             ]
         }
     },

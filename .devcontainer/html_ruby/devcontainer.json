@@ -1,18 +1,13 @@
 {
-    "name": "Dotnet",
-    "image": "mcr.microsoft.com/devcontainers/dotnet:8.0",
+    "name": "HTML + Ruby",
+    "image": "mcr.microsoft.com/devcontainers/ruby:2.7",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
-        5000,
-        5001
+        4567
     ],
     "portsAttributes": {
-        "5000": {
-            "label": "Dotnet HTTP",
-            "onAutoForward": "openBrowserOnce"
-        },
-        "5001": {
-            "label": "Dotnet HTTPS",
+        "4567": {
+            "label": "Ruby",
             "onAutoForward": "openBrowserOnce"
         }
     },
@@ -29,14 +24,16 @@
     "containerEnv": {
         "PAYPAL_API_BASE_URL": "https://api-m.sandbox.paypal.com",
         "DOMAINS": "paypal.com",
-        "VISIBLE_FOLDER_SERVER": "dotnet"
+        "PAYPAL_SDK_BASE_URL": "https://www.sandbox.paypal.com",
+        "VISIBLE_FOLDER_SERVER": "ruby",
+        "VISIBLE_FOLDER_CLIENT": "html"
     },
     "customizations": {
         "vscode": {
             "extensions": [
                 "vsls-contrib.codetour",
                 "PayPal.vscode-paypal",
-                "ms-dotnettools.csharp"
+                "rebornix.Ruby"
             ]
         },
         "settings": {
@@ -44,10 +41,10 @@
         },
         "codespaces": {
             "openFiles": [
-                "server/dotnet/README.md"
+                "README.md"
             ]
         }
     },
-    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/dotnet && dotnet restore",
-    "postAttachCommand": "cd server/dotnet && dotnet run"
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/ruby && gem install bundler:1.17.2 && bundle _1.17.2_ install --path vendor/bundle",
+    "postAttachCommand": "cd server/ruby && bundle exec ruby src/server.rb"
 }

@@ -1,13 +1,13 @@
 {
-    "name": "Node",
-    "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
+    "name": "HTML + Python",
+    "image": "mcr.microsoft.com/devcontainers/python:3.10",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
-        3000
+        8888
     ],
     "portsAttributes": {
-        "3000": {
-            "label": "Node",
+        "8888": {
+            "label": "Python",
             "onAutoForward": "openBrowserOnce"
         }
     },
@@ -24,25 +24,27 @@
     "containerEnv": {
         "PAYPAL_API_BASE_URL": "https://api-m.sandbox.paypal.com",
         "DOMAINS": "paypal.com",
-        "VISIBLE_FOLDER_SERVER": "node"
+        "VISIBLE_FOLDER_SERVER": "python",
+        "VISIBLE_FOLDER_CLIENT": "html"
     },
     "customizations": {
         "vscode": {
             "extensions": [
                 "vsls-contrib.codetour",
                 "PayPal.vscode-paypal",
-                "dbaeumer.vscode-eslint"
+                "ms-python.python"
             ]
         },
         "settings": {
-            "git.openRepositoryInParentFolders": "always"
+            "git.openRepositoryInParentFolders": "always",
+            "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
         },
         "codespaces": {
             "openFiles": [
-                "server/node/README.md"
+                "README.md"
             ]
         }
     },
-    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/node && npm install",
-    "postAttachCommand": "cd server/node && npm start"
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/python && python -m venv .venv && . .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt",
+    "postAttachCommand": "cd server/python && . .venv/bin/activate && python app.py"
 }

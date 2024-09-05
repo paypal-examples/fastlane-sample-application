@@ -1,13 +1,13 @@
 {
-    "name": "Java",
-    "image": "mcr.microsoft.com/devcontainers/java:17",
+    "name": "HTML + Node",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
-        8080
+        3000
     ],
     "portsAttributes": {
-        "8080": {
-            "label": "Java",
+        "3000": {
+            "label": "Node",
             "onAutoForward": "openBrowserOnce"
         }
     },
@@ -24,14 +24,15 @@
     "containerEnv": {
         "PAYPAL_API_BASE_URL": "https://api-m.sandbox.paypal.com",
         "DOMAINS": "paypal.com",
-        "VISIBLE_FOLDER_SERVER": "java"
+        "VISIBLE_FOLDER_SERVER": "node",
+        "VISIBLE_FOLDER_CLIENT": "html"
     },
     "customizations": {
         "vscode": {
             "extensions": [
                 "vsls-contrib.codetour",
                 "PayPal.vscode-paypal",
-                "vscjava.vscode-java-pack"
+                "dbaeumer.vscode-eslint"
             ]
         },
         "settings": {
@@ -39,16 +40,10 @@
         },
         "codespaces": {
             "openFiles": [
-                "server/java/README.md"
+                "README.md"
             ]
         }
     },
-    "features": {
-        "ghcr.io/devcontainers/features/java:1": {
-            "version": "17",
-            "installMaven": "true"
-        }
-    },
-    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd /workspaces/${localWorkspaceFolderBasename}/server && touch java/.env && cd java && mvn clean install",
-    "postAttachCommand": "cd server/java && mvn spring-boot:run"
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/node && npm install",
+    "postAttachCommand": "cd server/node && npm start"
 }
