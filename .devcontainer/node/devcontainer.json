@@ -1,7 +1,7 @@
 {
     "name": "Node",
     "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
-    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}/server/node",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
         3000
     ],
@@ -23,7 +23,8 @@
     },
     "containerEnv": {
         "PAYPAL_API_BASE_URL": "https://api-m.sandbox.paypal.com",
-        "DOMAINS": "paypal.com"
+        "DOMAINS": "paypal.com",
+        "VISIBLE_FOLDER_SERVER": "node"
     },
     "customizations": {
         "vscode": {
@@ -42,6 +43,6 @@
             ]
         }
     },
-    "postCreateCommand": "npm install",
-    "postAttachCommand": "npm start"
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/node && npm install",
+    "postAttachCommand": "cd server/node && npm start"
 }
