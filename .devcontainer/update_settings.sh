@@ -4,6 +4,7 @@ set -e
 
 VISIBLE_FOLDER_SERVER="$VISIBLE_FOLDER_SERVER"
 VISIBLE_FOLDER_CLIENT="$VISIBLE_FOLDER_CLIENT"
+VISIBLE_FOLDER_DEVCONTAINER="${VISIBLE_FOLDER_CLIENT}_${VISIBLE_FOLDER_SERVER}"
 
 if [ -z "$VISIBLE_FOLDER_CLIENT" ]; then
     echo "Error: VISIBLE_FOLDER_CLIENT is not set, setting it to default"
@@ -45,8 +46,7 @@ echo "{
 first=true
 for dir in "$SERVER_DIR"/*/ ; do
     dir_name=$(basename "$dir")
-    if [ -d "$dir" ] && [ "$dir_name" != "$VISIBLE_FOLDER_SERVER" ] && \
-       ([ "$dir_name" != "shared" ] || [ "$VISIBLE_FOLDER_CLIENT" != "html" ]); then
+    if [ -d "$dir" ] && [ "$dir_name" != "$VISIBLE_FOLDER_SERVER" ] && ([ "$dir_name" != "shared" ] || [ "$VISIBLE_FOLDER_CLIENT" != "html" ]); then
         if [ "$first" = true ] ; then
             first=false
         else
@@ -58,7 +58,7 @@ done
 
 for dir in "$DEVCONTATINER_DIR"/*/ ; do
     dir_name=$(basename "$dir")
-    if [ -d "$dir" ] && [ "$dir_name" != "$VISIBLE_FOLDER_SERVER" ]; then
+    if [ -d "$dir" ] && [ "$dir_name" != "$VISIBLE_FOLDER_SERVER" ] && [ "$dir_name" != "$VISIBLE_FOLDER_DEVCONTAINER" ]; then
         if [ "$first" = true ] ; then
             first=false
         else
