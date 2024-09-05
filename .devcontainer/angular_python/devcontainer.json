@@ -3,11 +3,16 @@
     "image": "mcr.microsoft.com/devcontainers/python:3.10",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
-        8888
+        8888,
+        4200
     ],
     "portsAttributes": {
         "8888": {
             "label": "Python",
+            "onAutoForward": "openBrowserOnce"
+        },
+        "4200": {
+            "label": "Angular",
             "onAutoForward": "openBrowserOnce"
         }
     },
@@ -45,6 +50,11 @@
             ]
         }
     },
-    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/python && python -m venv .venv && . .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt",
-    "postAttachCommand": "cd server/python && . .venv/bin/activate && python app.py"
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "lts"
+        }
+    },
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/python && python -m venv .venv && . .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt && cd /workspaces/${localWorkspaceFolderBasename}/client/angular && npm install",
+    "postAttachCommand": "cd server/python && . .venv/bin/activate && python app.py & cd /workspaces/${localWorkspaceFolderBasename}/client/angular && npm start --no-analytics"
 }

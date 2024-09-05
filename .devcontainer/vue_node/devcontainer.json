@@ -3,11 +3,16 @@
     "image": "mcr.microsoft.com/devcontainers/javascript-node:20",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
-        3000
+        3000,
+        5173
     ],
     "portsAttributes": {
         "3000": {
             "label": "Node",
+            "onAutoForward": "openBrowserOnce"
+        },
+        "5173": {
+            "label": "Vue",
             "onAutoForward": "openBrowserOnce"
         }
     },
@@ -32,7 +37,9 @@
             "extensions": [
                 "vsls-contrib.codetour",
                 "PayPal.vscode-paypal",
-                "dbaeumer.vscode-eslint"
+                "dbaeumer.vscode-eslint",
+                "Vue.volar",
+                "Vue.vscode-typescript-vue-plugin"
             ]
         },
         "settings": {
@@ -44,6 +51,11 @@
             ]
         }
     },
-    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/node && npm install",
-    "postAttachCommand": "cd server/node && npm start"
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "lts"
+        }
+    },
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/node && npm install && cd /workspaces/${localWorkspaceFolderBasename}/client/vue && npm install",
+    "postAttachCommand": "cd server/node && npm start & cd /workspaces/${localWorkspaceFolderBasename}/client/vue && npm run dev"
 }

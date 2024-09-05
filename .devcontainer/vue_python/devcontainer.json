@@ -3,11 +3,16 @@
     "image": "mcr.microsoft.com/devcontainers/python:3.10",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
-        8888
+        8888,
+        5173
     ],
     "portsAttributes": {
         "8888": {
             "label": "Python",
+            "onAutoForward": "openBrowserOnce"
+        },
+        "5173": {
+            "label": "Vue",
             "onAutoForward": "openBrowserOnce"
         }
     },
@@ -32,7 +37,9 @@
             "extensions": [
                 "vsls-contrib.codetour",
                 "PayPal.vscode-paypal",
-                "ms-python.python"
+                "ms-python.python",
+                "Vue.volar",
+                "Vue.vscode-typescript-vue-plugin"
             ]
         },
         "settings": {
@@ -45,6 +52,11 @@
             ]
         }
     },
-    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/python && python -m venv .venv && . .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt",
-    "postAttachCommand": "cd server/python && . .venv/bin/activate && python app.py"
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "lts"
+        }
+    },
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/python && python -m venv .venv && . .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt && cd /workspaces/${localWorkspaceFolderBasename}/client/vue && npm install",
+    "postAttachCommand": "cd server/python && . .venv/bin/activate && python app.py & cd /workspaces/${localWorkspaceFolderBasename}/client/vue && npm run dev"
 }

@@ -3,11 +3,16 @@
     "image": "mcr.microsoft.com/devcontainers/php:8",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
-        8080
+        8080,
+        4200
     ],
     "portsAttributes": {
         "8080": {
             "label": "PHP",
+            "onAutoForward": "openBrowserOnce"
+        },
+        "4200": {
+            "label": "Angular",
             "onAutoForward": "openBrowserOnce"
         }
     },
@@ -45,6 +50,11 @@
             ]
         }
     },
-    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd /workspaces/${localWorkspaceFolderBasename}/server && touch php/.env && cd php && composer install",
-    "postAttachCommand": "cd server/php && php -S localhost:8080 -t public/"
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "lts"
+        }
+    },
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd /workspaces/${localWorkspaceFolderBasename}/server && touch php/.env && cd php && composer install && cd /workspaces/${localWorkspaceFolderBasename}/client/angular && npm install",
+    "postAttachCommand": "cd server/php && php -S localhost:8080 -t public/ & cd /workspaces/${localWorkspaceFolderBasename}/client/angular && npm start --no-analytics"
 }

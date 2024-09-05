@@ -3,11 +3,16 @@
     "image": "mcr.microsoft.com/devcontainers/java:17",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
-        8080
+        8080,
+        5173
     ],
     "portsAttributes": {
         "8080": {
             "label": "Java",
+            "onAutoForward": "openBrowserOnce"
+        },
+        "5173": {
+            "label": "Vue",
             "onAutoForward": "openBrowserOnce"
         }
     },
@@ -32,7 +37,9 @@
             "extensions": [
                 "vsls-contrib.codetour",
                 "PayPal.vscode-paypal",
-                "vscjava.vscode-java-pack"
+                "vscjava.vscode-java-pack",
+                "Vue.volar",
+                "Vue.vscode-typescript-vue-plugin"
             ]
         },
         "settings": {
@@ -48,8 +55,11 @@
         "ghcr.io/devcontainers/features/java:1": {
             "version": "17",
             "installMaven": "true"
+        },
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "lts"
         }
     },
-    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd /workspaces/${localWorkspaceFolderBasename}/server && touch java/.env && cd java && mvn clean install",
-    "postAttachCommand": "cd server/java && mvn spring-boot:run"
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd /workspaces/${localWorkspaceFolderBasename}/server && touch java/.env && cd java && mvn clean install && cd /workspaces/${localWorkspaceFolderBasename}/client/vue && npm install",
+    "postAttachCommand": "cd server/java && mvn spring-boot:run & cd /workspaces/${localWorkspaceFolderBasename}/client/vue && npm run dev"
 }

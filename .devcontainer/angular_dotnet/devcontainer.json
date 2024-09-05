@@ -4,7 +4,8 @@
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
         5000,
-        5001
+        5001,
+        4200
     ],
     "portsAttributes": {
         "5000": {
@@ -13,6 +14,10 @@
         },
         "5001": {
             "label": "Dotnet HTTPS",
+            "onAutoForward": "openBrowserOnce"
+        },
+        "4200": {
+            "label": "Angular",
             "onAutoForward": "openBrowserOnce"
         }
     },
@@ -49,6 +54,11 @@
             ]
         }
     },
-    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/dotnet && dotnet restore",
-    "postAttachCommand": "cd server/dotnet && dotnet run"
+    "features": {
+        "ghcr.io/devcontainers/features/node:1": {
+            "version": "lts"
+        }
+    },
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/dotnet && dotnet restore && cd /workspaces/${localWorkspaceFolderBasename}/client/angular && npm install",
+    "postAttachCommand": "cd server/dotnet && dotnet run & cd /workspaces/${localWorkspaceFolderBasename}/client/angular && npm start --no-analytics"
 }
