@@ -45,7 +45,8 @@ echo "{
 first=true
 for dir in "$SERVER_DIR"/*/ ; do
     dir_name=$(basename "$dir")
-    if [ -d "$dir" ] && [ "$dir_name" != "$VISIBLE_FOLDER_SERVER" ] && [ "$dir_name" != "shared" ]; then
+    if [ -d "$dir" ] && [ "$dir_name" != "$VISIBLE_FOLDER_SERVER" ] && \
+       ([ "$dir_name" != "shared" ] || [ "$VISIBLE_FOLDER_CLIENT" != "html" ]); then
         if [ "$first" = true ] ; then
             first=false
         else
