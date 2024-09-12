@@ -65,7 +65,27 @@ PayPal codespaces require a client ID and client secret for your app.
 
 ### Link to codespaces 
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application)
+| Application | Codespaces Link |
+| ---- | ---- |
+| Angular + Dotnet | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fangular_dotnet%2Fdevcontainer.json)|
+| Angular + Java | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fangular_java%2Fdevcontainer.json)|
+| Angular + Node | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fangular_node%2Fdevcontainer.json)|
+| Angular + PHP | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fangular_php%2Fdevcontainer.json)|
+| Angular + Python | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fangular_python%2Fdevcontainer.json)|
+| Angular + Ruby | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fangular_ruby%2Fdevcontainer.json)|
+| HTML + Dotnet | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fhtml_dotnet%2Fdevcontainer.json)|
+| HTML + Java | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fhtml_java%2Fdevcontainer.json)|
+| HTML + Node | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fhtml_node%2Fdevcontainer.json)|
+| HTML + PHP | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fhtml_php%2Fdevcontainer.json)|
+| HTML + Python | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fhtml_python%2Fdevcontainer.json)|
+| HTML + Ruby | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fhtml_ruby%2Fdevcontainer.json)|
+| Vue + Dotnet | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fvue_dotnet%2Fdevcontainer.json)|
+| Vue + Java | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fvue_java%2Fdevcontainer.json)|
+| Vue + Node | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fvue_node%2Fdevcontainer.json)|
+| Vue + PHP | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fvue_php%2Fdevcontainer.json)|
+| Vue + Python | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fvue_python%2Fdevcontainer.json)|
+| Vue + Ruby | [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/paypal-examples/fastlane-sample-application?devcontainer_path=.devcontainer%2Fvue_ruby%2Fdevcontainer.json)|
+
 
 ### Learn more 
 
