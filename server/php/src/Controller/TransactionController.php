@@ -44,6 +44,71 @@ class TransactionController extends AbstractController
             ],
         ];
 
+        if (array_key_exists("shippingAddress", $data)) {
+            $shippingAddress = $data["shippingAddress"];
+
+            $fullName = isset($shippingAddress["name"]["fullName"])
+                ? $shippingAddress["name"]["fullName"]
+                : null;
+
+            $companyName = isset($shippingAddress["companyName"])
+                ? $shippingAddress["companyName"]
+                : null;
+            $countryCode = isset($shippingAddress["phoneNumber"]["countryCode"])
+                ? $shippingAddress["phoneNumber"]["countryCode"]
+                : null;
+            $nationalNumber = isset(
+                $shippingAddress["phoneNumber"]["nationalNumber"]
+            )
+                ? $shippingAddress["phoneNumber"]["nationalNumber"]
+                : null;
+
+            $body["purchase_units"][0]["shipping"] = [
+                "type" => "SHIPPING",
+                "name" => $fullName ? ["full_name" => $fullName] : null,
+                "company_name" => !empty($companyName) ? $companyName : null,
+                "address" => [
+                    "address_line_1" => isset(
+                        $shippingAddress["address"]["addressLine1"]
+                    )
+                        ? $shippingAddress["address"]["addressLine1"]
+                        : null,
+                    "address_line_2" => isset(
+                        $shippingAddress["address"]["addressLine2"]
+                    )
+                        ? $shippingAddress["address"]["addressLine2"]
+                        : null,
+                    "admin_area_2" => isset(
+                        $shippingAddress["address"]["adminArea2"]
+                    )
+                        ? $shippingAddress["address"]["adminArea2"]
+                        : null,
+                    "admin_area_1" => isset(
+                        $shippingAddress["address"]["adminArea1"]
+                    )
+                        ? $shippingAddress["address"]["adminArea1"]
+                        : null,
+                    "postal_code" => isset(
+                        $shippingAddress["address"]["postalCode"]
+                    )
+                        ? $shippingAddress["address"]["postalCode"]
+                        : null,
+                    "country_code" => isset(
+                        $shippingAddress["address"]["countryCode"]
+                    )
+                        ? $shippingAddress["address"]["countryCode"]
+                        : null,
+                ],
+            ];
+        }
+
+        if ($countryCode && $nationalNumber) {
+            $body["purchase_units"][0]["shipping"]["phone_number"] = [
+                "country_code" => $countryCode,
+                "national_number" => $nationalNumber,
+            ];
+        }
+
         $result = $httpClient
             ->request("POST", $url, [
                 "headers" => $headers,

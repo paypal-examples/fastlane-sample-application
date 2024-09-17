@@ -52,6 +52,7 @@ public class TransactionPaypalController : Controller
                         {
                             type = "SHIPPING",
                             name = !string.IsNullOrEmpty(fullName) ? new { full_name = fullName } : null,
+                            company_name = !string.IsNullOrEmpty(request.ShippingAddress?.CompanyName) ? request.ShippingAddress?.CompanyName : null,
                             address = new
                             {
                                 address_line_1 = request.ShippingAddress.Address?.AddressLine1,
@@ -139,6 +140,7 @@ public class TransactionPaypalController : Controller
     public class ShippingAddress
     {
         public Name? Name { get; set; }
+        public string? CompanyName { get; set; }
         public Address? Address { get; set; }
         public PhoneNumber? PhoneNumber { get; set; }
     }

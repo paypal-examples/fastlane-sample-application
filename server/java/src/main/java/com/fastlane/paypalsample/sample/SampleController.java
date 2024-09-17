@@ -108,6 +108,11 @@ public class SampleController {
                 shipping.put("name", !isFullNameEmpty ? name : null);
             }
 
+            if (shippingNode.hasNonNull("companyName")) {
+                String companyName = shippingNode.path("companyName").textValue();
+                shipping.put("company_name", !companyName.isEmpty() ? companyName : null);
+            }
+
             if (shippingNode.hasNonNull("address")) {
                 Map<String, String> address = new HashMap<>();
 
@@ -151,5 +156,27 @@ public class SampleController {
         } catch (IllegalArgumentException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @CrossOrigin
+    @GetMapping("/sdk/url")
+    public ResponseEntity<?> getSdkUrl() {
+        String sdkUrl = PAYPAL_SDK_BASE_URL + "/sdk/js?client-id=" + PAYPAL_CLIENT_ID + "&components=buttons,fastlane";
+        Map<String, Object> response = new HashMap<>();
+
+        response.put("url", sdkUrl);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @GetMapping("/sdk/client-token")
+    public ResponseEntity<?> getClientToken() {
+        String clientToken = tokenService.getClientToken();
+        Map<String, Object> response = new HashMap<>();
+
+        response.put("clientToken", clientToken);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

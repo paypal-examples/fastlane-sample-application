@@ -5,6 +5,15 @@ public class ShippingAddress {
     private Address address;
     private PhoneNumber phoneNumber;
     private Name name;
+    private String companyName;
+
+    public String getCompanyName() {
+        return companyName;
+    }
+
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
+    }
 
     public Address getAddress() {
         return address;

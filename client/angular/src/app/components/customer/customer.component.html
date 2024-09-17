@@ -1,0 +1,26 @@
+<section id="customer" [ngClass]="{ active: isActive, visited: visited }">
+  <div class="header">
+    <h2>Customer</h2>
+    <button (click)="onEditButtonClick()" id="email-edit-button" type="button" class="edit-button">
+      <span class="button-icon"></span>
+      Edit
+    </button>
+  </div>
+  <div class="email-section">
+    <div class="summary">{{ currentEmail }}</div>
+    <fieldset class="email-input-with-watermark">
+      <div class="email-container">
+        <div class="form-group">
+          <input id="email-input" [formControl]="email" (keydown.enter)="$event.preventDefault()" name="email"
+            type="email" placeholder="Email" autocomplete="email" />
+          <label for="email-input" class="label">E-mail</label>
+        </div>
+        <button (click)="onContinueButtonClick($event)" id="email-submit-button" type="button" class="submit-button"
+          [disabled]="!isContinueButtonEnabled">
+          Continue
+        </button>
+      </div>
+      <div id="watermark-container"></div>
+    </fieldset>
+  </div>
+</section>

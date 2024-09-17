@@ -12,7 +12,7 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins("*");
+            policy.WithOrigins("*").AllowAnyHeader().AllowAnyMethod().AllowAnyHeader().AllowAnyMethod();
         });
 });
 
@@ -30,7 +30,7 @@ var app = builder.Build();
 app.UseDefaultFiles(new DefaultFilesOptions
 {
     FileProvider = new PhysicalFileProvider(
-        Path.Combine(app.Environment.ContentRootPath, "../../client")),
+        Path.Combine(app.Environment.ContentRootPath, "../../client/html/src")),
     RequestPath = ""
 });
 
@@ -38,7 +38,7 @@ app.UseDefaultFiles(new DefaultFilesOptions
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
-        Path.Combine(app.Environment.ContentRootPath, "../../client")),
+        Path.Combine(app.Environment.ContentRootPath, "../../client/html/src")),
     RequestPath = "",
 });
 

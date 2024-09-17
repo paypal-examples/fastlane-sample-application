@@ -85,6 +85,7 @@ async function initFastlane() {
     };
 
     const getAddressSummary = ({
+      companyName,
       address: {
         addressLine1,
         addressLine2,
@@ -99,6 +100,7 @@ async function initFastlane() {
       const isNotEmpty = (field) => !!field;
       const summary = [
         fullName || [firstName, lastName].filter(isNotEmpty).join(' '),
+        companyName,
         [addressLine1, addressLine2].filter(isNotEmpty).join(', '),
         [
           adminArea2,
@@ -196,6 +198,7 @@ async function initFastlane() {
         // extract form values
         const firstName = form.elements['given-name'].value;
         const lastName = form.elements['family-name'].value;
+        const company = form.elements['company'].value;
         const addressLine1 = form.elements['address-line1'].value;
         const addressLine2 = form.elements['address-line2'].value;
         const adminArea2 = form.elements['address-level2'].value;
@@ -207,6 +210,7 @@ async function initFastlane() {
 
         // update state & form UI
         shippingAddress = {
+          companyName: company,
           address: {
             addressLine1,
             addressLine2,

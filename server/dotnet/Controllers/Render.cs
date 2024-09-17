@@ -47,4 +47,20 @@ public class RenderPaypalController : Controller
 
         return Content(renderedHtml, "text/html", Encoding.UTF8);
     }
+    
+    [HttpGet("/sdk/url")]
+    public IActionResult GetSdkUrl()
+    {
+        var sdkUrl = SdkScriptHelpers.GetPayPalSdkUrl();
+
+        return new OkObjectResult(new { url = sdkUrl });
+    }
+    
+    [HttpGet("/sdk/client-token")]
+    public async Task<IActionResult> GetClientToken()
+    {
+        var clientToken = await SdkScriptHelpers.GetClientTokenAsync(_httpClientFactory);
+
+        return new OkObjectResult(new { clientToken });
+    }
 }

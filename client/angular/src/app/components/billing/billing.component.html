@@ -1,0 +1,74 @@
+<section id="billing" [ngClass]="{ active: isActive, visited: visited || billingAddressData }">
+  <div class="header">
+    <h2>Billing</h2>
+    <button (click)="onEditButtonClick()" id="billing-edit-button" type="button" class="edit-button">
+      <span class="button-icon"></span>
+      Edit
+    </button>
+  </div>
+  <div class="summary">
+    <ng-container *ngIf="billingAddressData">
+      <span>{{
+        billingAddressData.addressLine1 + ', ' + billingAddressData.addressLine2
+        }}</span><br />
+      <span>{{
+        billingAddressData.adminArea2 +
+        ', ' +
+        billingAddressData.adminArea1 +
+        ' ' +
+        billingAddressData.postalCode +
+        ', ' +
+        billingAddressData.countryCode
+        }}</span><br />
+    </ng-container>
+  </div>
+  <form [formGroup]="billingForm" style="padding: 0">
+    <fieldset>
+      <div class="form-row">
+        <div class="form-group">
+          <input formControlName="streetAddress" id="address-line1" name="billing-address-line1"
+            placeholder="Street address" autocomplete="address-line1" />
+          <label for="address-line1" class="label">Address Line 1</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input formControlName="extendedAddress" id="billing-address-line2" name="billing-address-line2"
+            placeholder="Apt., ste., bldg. (optional)" autocomplete="address-line2" />
+          <label for="billing-address-line2" class="label">
+            Apt., ste, bldg. (optional)
+          </label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input formControlName="locality" id="billing-address-level2" name="billing-address-level2" placeholder="City"
+            autocomplete="address-level2" />
+          <label for="billing-address-level2" class="label">City</label>
+        </div>
+        <div class="form-group">
+          <input formControlName="region" id="billing-address-level1" name="billing-address-level1" placeholder="State"
+            autocomplete="address-level1" />
+          <label for="billing-address-level1" class="label">State</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input formControlName="postalCode" id="billing-postal-code" name="billing-postal-code" placeholder="ZIP code"
+            autocomplete="postal-code" />
+          <label for="billing-postal-code" class="label">ZIP Code</label>
+        </div>
+        <div class="form-group">
+          <input formControlName="countryCodeAlpha2" id="billing-country" name="billing-country" placeholder="Country"
+            autocomplete="country" />
+          <label for="billing-country" class="label">
+            Country (eg. US, UK)
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    <button (click)="onContinueButtonClick()" id="billing-submit-button" type="button" class="submit-button">
+      Continue
+    </button>
+  </form>
+</section>

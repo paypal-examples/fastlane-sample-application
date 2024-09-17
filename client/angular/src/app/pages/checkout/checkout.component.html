@@ -1,0 +1,39 @@
+<form>
+    <h1>Fastlane - PayPal Integration</h1>
+
+    <app-customer
+        *ngIf="fastlaneWatermarkComponent && fastlaneIdentity" 
+        [identity]="fastlaneIdentity"
+        [watermarkComponent]="fastlaneWatermarkComponent"
+        [isActive]="currentSection === section.Customer"
+        (editClickEvent)="setActiveSection(section.Customer)"
+        (emailChangeEvent)="onEmailChange($event)"
+    >
+    </app-customer>
+
+    <hr />
+    
+    <app-shipping 
+        [isAuthenticated]="currentCustomer.authenticated"
+        [shippingAddressData]="currentCustomer.shippingAddress"
+        [isActive]="currentSection === section.Shipping"
+        (editClickEvent)="onShippingEditButtonClick()"
+        (shippingChangeEvent)="onShippingChange($event)"
+    >
+    </app-shipping>
+    
+    <hr />
+
+    <app-payment 
+        *ngIf="fastlanePaymentComponent"
+        [isAuthenticated]="currentCustomer.authenticated"
+        [paymentComponent]="fastlanePaymentComponent"
+        [isActive]="currentSection === section.Payment"
+        (editClickEvent)="setActiveSection(section.Payment)"
+    >    
+    </app-payment>
+
+    <button *ngIf="currentSection === section.Payment" (click)="onCheckoutButtonClick()" [disabled]="!checkoutButtonEnabled" id="checkout-button" type="button" class="submit-button">
+        Checkout
+    </button>
+</form>

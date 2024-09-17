@@ -34,7 +34,7 @@ class CheckoutServlet < WEBrick::HTTPServlet::AbstractServlet
     template = File.read(template_path)
     rendered_template = Mustache.render(template, data)
 
-    response['Content-Type'] = 'text/html'
+    response['Content-Type'] = 'text/html;charset=UTF-8'
     response.body = rendered_template
   end
 end

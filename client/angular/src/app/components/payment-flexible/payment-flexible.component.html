@@ -1,0 +1,17 @@
+<section id="payment" [ngClass]="{ active: isActive, visited: visited, pinned: isAuthenticated }">
+  <div class="header">
+    <h2>Payment</h2>
+    <button (click)="onEditButtonClick()" id="payment-edit-button" type="button" class="edit-button"
+      [ngClass]="{ 'edit-button': true, pinned: isAuthenticated }">
+      <span class="button-icon"></span>
+      Edit
+    </button>
+  </div>
+  <fieldset>
+    <div id="selected-card">
+      {{ cardSummary }}
+    </div>
+    <div id="payment-watermark"></div>
+    <div id="card-component"></div>
+  </fieldset>
+</section>

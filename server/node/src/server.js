@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import { renderCheckout } from './controllers/checkout.js';
 import { createOrder } from './controllers/transaction.js';
+import { getPayPalSdkUrl, getClientToken } from './lib/sdk-script-helpers.js';
 
 export function configureServer(app) {
   app.engine('html', engines.mustache);
@@ -18,5 +19,15 @@ export function configureServer(app) {
   app.get('/', renderCheckout);
   app.post('/transaction', createOrder);
 
-  app.use(express.static('../../client'));
+  app.get('/sdk/url', (_req, res) => {
+    const sdkUrl = getPayPalSdkUrl();
+    res.json({ url: sdkUrl });
+  });
+
+  app.get('/sdk/client-token', async (_req, res) => {
+    const clientToken = await getClientToken();
+    res.json({ clientToken });
+  });
+
+  app.use(express.static('../../client/html/src'));
 }

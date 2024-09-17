@@ -23,4 +23,4 @@ This folder contains example code for a Fastlane integration using Python to com
     ```
     python app.py
     ```
-4. Go to [localhost:8080](localhost:8080) for the Quick Start Integration or [localhost:8080/?flexible](localhost:8080/?flexible) for the Flexible Integration
+4. To view the application in your browser, choose a front-end implementation from the `client` folder at the root of this repository and follow the instructions in that folder's README.

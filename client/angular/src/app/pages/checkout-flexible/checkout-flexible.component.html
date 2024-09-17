@@ -1,0 +1,52 @@
+<form>
+    <h1>Fastlane - PayPal Integration (Flexible)</h1>
+
+    <app-customer
+        *ngIf="fastlaneWatermarkComponent && fastlaneIdentity" 
+        [identity]="fastlaneIdentity"
+        [watermarkComponent]="fastlaneWatermarkComponent"
+        [isActive]="currentSection === section.Customer"
+        (editClickEvent)="setActiveSection(section.Customer)"
+        (emailChangeEvent)="onEmailChange($event)"
+    >
+    </app-customer>
+
+    <hr />
+    
+    <app-shipping 
+        [isAuthenticated]="currentCustomer.authenticated"
+        [shippingAddressData]="currentCustomer.shippingAddress"
+        [isActive]="currentSection === section.Shipping"
+        (editClickEvent)="onShippingEditButtonClick()"
+        (shippingChangeEvent)="onShippingChange($event)"
+    >
+    </app-shipping>
+    
+    <hr />
+
+    <ng-container *ngIf="!currentCustomer.paymentToken">
+        <app-billing
+            [billingAddressData]="currentCustomer.billingAddress"
+            [isActive]="currentSection === section.Billing"
+            (editClickEvent)="setActiveSection(section.Billing)"
+            (billingChangeEvent)="onBillingChange($event)"
+        >
+        </app-billing>
+
+        <hr />
+    </ng-container>
+
+    <app-payment-flexible 
+        *ngIf="fastlaneCardComponent"
+        [isAuthenticated]="currentCustomer.authenticated"
+        [paymentToken]="currentCustomer.paymentToken"
+        [cardComponent]="fastlaneCardComponent"
+        [isActive]="currentSection === section.Payment"
+        (editClickEvent)="onPaymentEdit()"
+    >    
+    </app-payment-flexible>
+
+    <button *ngIf="currentSection === section.Payment" (click)="onCheckoutButtonClick()" [disabled]="!checkoutButtonEnabled" id="checkout-button" type="button" class="submit-button">
+        Checkout
+    </button>
+</form>

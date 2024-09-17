@@ -30,14 +30,14 @@ export async function getClientToken() {
 
     const headers = new Headers();
     const auth = Buffer.from(
-      `${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`
+      `${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`,
     ).toString('base64');
     headers.append('Authorization', `Basic ${auth}`);
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     if (PAYPAL_MERCHANT_ID) {
       headers.append(
         'PayPal-Auth-Assertion',
-        getAuthAssertionToken(PAYPAL_CLIENT_ID, PAYPAL_MERCHANT_ID)
+        getAuthAssertionToken(PAYPAL_CLIENT_ID, PAYPAL_MERCHANT_ID),
       );
     }
 

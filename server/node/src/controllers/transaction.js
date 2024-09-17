@@ -7,7 +7,7 @@ const {
   PAYPAL_MERCHANT_ID,
 } = process.env;
 
-async function getAccessToken() {
+export async function getAccessToken() {
   if (!PAYPAL_CLIENT_ID || !PAYPAL_CLIENT_SECRET) {
     throw new Error('Missing API credentials');
   }
@@ -16,7 +16,7 @@ async function getAccessToken() {
 
   const headers = new Headers();
   const auth = Buffer.from(
-    `${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`
+    `${PAYPAL_CLIENT_ID}:${PAYPAL_CLIENT_SECRET}`,
   ).toString('base64');
   headers.append('Authorization', `Basic ${auth}`);
   headers.append('Content-Type', 'application/x-www-form-urlencoded');
@@ -24,7 +24,7 @@ async function getAccessToken() {
     headers.append('PayPal-Partner-Attribution-ID', PAYPAL_MERCHANT_ID);
     headers.append(
       'PayPal-Auth-Assertion',
-      getAuthAssertionToken(PAYPAL_CLIENT_ID, PAYPAL_MERCHANT_ID)
+      getAuthAssertionToken(PAYPAL_CLIENT_ID, PAYPAL_MERCHANT_ID),
     );
   }
 
@@ -54,7 +54,7 @@ export async function createOrder(req, res) {
     headers.append('PayPal-Request-Id', Date.now().toString());
     headers.append('Authorization', `Bearer ${accessToken}`);
     headers.append('Content-Type', 'application/json');
-  
+
     const { fullName } = shippingAddress?.name ?? {};
     const { countryCode, nationalNumber } = shippingAddress?.phoneNumber ?? {};
     const payload = {
@@ -78,6 +78,7 @@ export async function createOrder(req, res) {
                   full_name: fullName,
                 },
               }),
+              company_name: shippingAddress.companyName || null,
               address: {
                 address_line_1: shippingAddress.address.addressLine1,
                 address_line_2: shippingAddress.address.addressLine2,
@@ -86,12 +87,13 @@ export async function createOrder(req, res) {
                 postal_code: shippingAddress.address.postalCode,
                 country_code: shippingAddress.address.countryCode,
               },
-              ...(countryCode && nationalNumber && {
-                phone_number: {
-                  country_code: countryCode,
-                  national_number: nationalNumber,
-                },
-              }),
+              ...(countryCode &&
+                nationalNumber && {
+                  phone_number: {
+                    country_code: countryCode,
+                    national_number: nationalNumber,
+                  },
+                }),
             },
           }),
         },

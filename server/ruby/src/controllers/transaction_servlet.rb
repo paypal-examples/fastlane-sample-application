@@ -44,6 +44,12 @@ class TransactionServlet < WEBrick::HTTPServlet::AbstractServlet
     response
   end
 
+  def do_OPTIONS(request, response)
+    response.header['Access-Control-Allow-Origin'] = '*'
+    response.header['Access-Control-Allow-Methods'] = 'GET, POST, OPTIONS, PUT, DELETE'
+    response.header['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+  end
+
   def get_payload(data)
     payment_token = data['paymentToken']
     shipping_address = data['shippingAddress']
@@ -66,13 +72,15 @@ class TransactionServlet < WEBrick::HTTPServlet::AbstractServlet
     }
 
     if shipping_address
-      full_name = shipping_address['fullName']
+      full_name = shipping_address.dig('name', 'fullName')
       country_code = shipping_address.dig('phoneNumber', 'countryCode')
       national_number = shipping_address.dig('phoneNumber', 'nationalNumber')
+      company_name = shipping_address.dig('companyName')
 
       payload[:purchase_units][0][:shipping] = {
         type: 'SHIPPING',
         name: full_name ? { full_name: full_name } : nil,
+        company_name: company_name.nil? || company_name.empty? ? nil : company_name,
         address: {
           address_line_1: shipping_address.dig('address', 'addressLine1'),
           address_line_2: shipping_address.dig('address', 'addressLine2'),

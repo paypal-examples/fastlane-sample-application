@@ -30,7 +30,8 @@ This sample app demonstrates how to integrate with Fastlane using PayPal's REST 
     ```
     To run this application, you will need this folder and the `shared` folder. The other folders under `server` can be safely deleted or ignored.
 3. Open the `.env` file in a text editor and replace the placeholders with the appropriate values.
-4. Follow the instructions in your chosen folder's README.
+4. To run the server, follow the instructions in your chosen folder's README.
+5. To view the application in your browser, choose a front-end implementation from the `client` folder at the root of this repository and follow the instructions in that folder's README.
 
 ## Client Integrations
 

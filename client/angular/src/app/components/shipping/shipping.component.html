@@ -1,0 +1,102 @@
+<section id="shipping" [ngClass]="{ active: isActive, visited: visited || isAuthenticated }">
+  <div class="header">
+    <h2>Shipping</h2>
+    <button (click)="onEditButtonClick()" id="shipping-edit-button" type="button" class="edit-button">
+      <span class="button-icon"></span>
+      Edit
+    </button>
+  </div>
+  <div class="summary">
+    <ng-container *ngIf="shippingAddressData">
+      <div [innerHTML]="getAddressSummary"></div>
+    </ng-container>
+  </div>
+  <form [formGroup]="shippingForm" style="padding: 0">
+    <fieldset>
+      <span>
+        <input id="shipping-required-checkbox" name="shipping-required" type="checkbox" checked />
+        <label for="shipping-required-checkbox" class="checkbox-label">
+          This purchase requires shipping
+        </label>
+      </span>
+      <div class="form-row">
+        <div class="form-group">
+          <input formControlName="firstName" id="given-name" name="given-name" autocomplete="given-name"
+            placeholder="First Name" />
+          <label for="given-name" class="label">First Name</label>
+        </div>
+        <div class="form-group">
+          <input formControlName="lastName" id="family-name" name="family-name" autocomplete="family-name"
+            placeholder="Last Name" />
+          <label for="family-name" class="label">Last Name</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input formControlName="company" id="company" name="company" autocomplete="organization"
+            placeholder="Company name (optional)" />
+          <label for="company" class="label">Company name (optional)</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input formControlName="streetAddress" id="address-line1" name="address-line1" autocomplete="address-line1"
+            placeholder="Address Line 1" />
+          <label for="address-line1" class="label">Address Line 1</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input formControlName="extendedAddress" id="address-line2" name="address-line2" autocomplete="address-line2"
+            placeholder="Apt., ste., bldg. (optional)" />
+          <label for="address-line2" class="label">
+            Apt., ste, bldg. (optional)
+          </label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input formControlName="locality" id="address-level2" name="address-level2" autocomplete="address-level2"
+            placeholder="City" />
+          <label for="address-level2" class="label">City</label>
+        </div>
+
+        <div class="form-group">
+          <input formControlName="region" id="address-level1" name="address-level1" autocomplete="address-level1"
+            placeholder="State" />
+          <label for="address-level1" class="label">State</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input formControlName="postalCode" id="postal-code" name="postal-code" autocomplete="postal-code"
+            placeholder="ZIP Code" />
+          <label for="postal-code" class="label">ZIP Code</label>
+        </div>
+        <div class="form-group">
+          <input formControlName="countryCodeAlpha2" id="country" name="country" autocomplete="country"
+            placeholder="Country (eg. US, UK)" />
+          <label for="country" class="label">Country (eg. US, UK)</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <input formControlName="phoneCountryCode" id="tel-country-code" name="tel-country-code"
+            autocomplete="tel-country-code" placeholder="Country calling code" />
+          <label for="tel-country-code" class="label">
+            Country calling code
+          </label>
+        </div>
+
+        <div class="form-group">
+          <input formControlName="phoneNumber" id="tel-national" name="tel-national" type="tel"
+            autocomplete="tel-national" placeholder="Phone Number" />
+          <label for="tel-national" class="label">Phone Number</label>
+        </div>
+      </div>
+    </fieldset>
+    <button (click)="onContinueButtonClick()" id="shipping-submit-button" type="button" class="submit-button">
+      Confirm
+    </button>
+  </form>
+</section>

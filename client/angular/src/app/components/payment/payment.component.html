@@ -1,0 +1,12 @@
+<section id="payment" [ngClass]="{ active: isActive, visited: visited, pinned: isAuthenticated }">
+  <div class="header">
+    <h2>Payment</h2>
+    <button (click)="onEditButtonClick()" id="payment-edit-button" type="button" class="edit-button">
+      <span class="button-icon"></span>
+      Edit
+    </button>
+  </div>
+  <fieldset>
+    <div id="payment-component"></div>
+  </fieldset>
+</section>

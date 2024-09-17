@@ -41,11 +41,29 @@ class CheckoutController extends AbstractController
         ];
 
         $htmlTemplate = file_get_contents(
-            __DIR__ . "/../../../shared/views/checkout.html"
+            __DIR__ .
+                "/../../../shared/views/" .
+                ($isFlexibleIntegration
+                    ? "checkout-flexible.html"
+                    : "checkout.html")
         );
 
         $template = $this->mustache->render($htmlTemplate, $locals);
 
         return new Response($template);
+    }
+
+    public function getSDKUrl()
+    {
+        $sdkUrl = SdkScriptHelpers::getPayPalSDKUrl();
+        return $this->json(["url" => $sdkUrl])->setEncodingOptions(
+            JSON_UNESCAPED_SLASHES
+        );
+    }
+
+    public function getClientToken()
+    {
+        $clientToken = SdkScriptHelpers::getClientToken();
+        return $this->json(["clientToken" => $clientToken]);
     }
 }

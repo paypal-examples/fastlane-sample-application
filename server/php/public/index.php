@@ -8,7 +8,7 @@ require_once dirname(__DIR__) . "/vendor/autoload_runtime.php";
 return function (array $context) {
     $fileSystem = new Filesystem();
 
-    $STATIC_FILES_FOLDER = __DIR__ . "/../../../client";
+    $STATIC_FILES_FOLDER = __DIR__ . "/../../../client/html/src";
 
     $files = scandir($STATIC_FILES_FOLDER);
 
