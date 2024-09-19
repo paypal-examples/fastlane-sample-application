@@ -10,7 +10,7 @@ package-lock.json
 ### .NET ###
 **.sln
 **.http
-bin/
+**/dotnet/**/bin/
 obj/
 .fake
 
