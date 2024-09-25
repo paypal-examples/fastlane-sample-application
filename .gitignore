@@ -78,3 +78,6 @@ build-iPhoneSimulator/
 /lib/bundler/man/
 .rvmrc
 
+### Devcontainer ###
+.vscode/settings.json
+.devcontainer/update_settings.sh

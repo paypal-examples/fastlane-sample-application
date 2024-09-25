@@ -1,13 +1,18 @@
 {
-    "name": "Python",
-    "image": "mcr.microsoft.com/devcontainers/python:3.10",
+    "name": "HTML + Dotnet",
+    "image": "mcr.microsoft.com/devcontainers/dotnet:8.0",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "forwardPorts": [
-        8888
+        5000,
+        5001
     ],
     "portsAttributes": {
-        "8888": {
-            "label": "Python",
+        "5000": {
+            "label": "Dotnet HTTP",
+            "onAutoForward": "openBrowserOnce"
+        },
+        "5001": {
+            "label": "Dotnet HTTPS",
             "onAutoForward": "openBrowserOnce"
         }
     },
@@ -24,19 +29,19 @@
     "containerEnv": {
         "PAYPAL_API_BASE_URL": "https://api-m.sandbox.paypal.com",
         "DOMAINS": "paypal.com",
-        "VISIBLE_FOLDER_SERVER": "python"
+        "VISIBLE_FOLDER_SERVER": "dotnet",
+        "VISIBLE_FOLDER_CLIENT": "html"
     },
     "customizations": {
         "vscode": {
             "extensions": [
                 "vsls-contrib.codetour",
                 "PayPal.vscode-paypal",
-                "ms-python.python"
+                "ms-dotnettools.csharp"
             ]
         },
         "settings": {
-            "git.openRepositoryInParentFolders": "always",
-            "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python"
+            "git.openRepositoryInParentFolders": "always"
         },
         "codespaces": {
             "openFiles": [
@@ -44,6 +49,6 @@
             ]
         }
     },
-    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/python && python -m venv .venv && . .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt",
-    "postAttachCommand": "cd server/python && . .venv/bin/activate && python app.py"
+    "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/dotnet && dotnet restore",
+    "postAttachCommand": "cd server/dotnet && dotnet run"
 }
