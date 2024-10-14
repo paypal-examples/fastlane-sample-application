@@ -20,7 +20,7 @@ class Auth
         $jwtParts = [$header, $body, $signature];
 
         $authAssertion = array_map(function ($part) {
-            return $part && base64_encode(json_encode($part));
+            return $part ? base64_encode(json_encode($part)) : "";
         }, $jwtParts);
 
         return join(".", $authAssertion);

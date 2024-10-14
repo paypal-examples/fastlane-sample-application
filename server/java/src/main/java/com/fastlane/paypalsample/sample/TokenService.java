@@ -27,6 +27,7 @@ public class TokenService {
     private final String PAYPAL_CLIENT_ID;
     private final String PAYPAL_CLIENT_SECRET;
     private final String PAYPAL_MERCHANT_ID;
+    private final String PAYPAL_BN_CODE;
     private final String DOMAINS;
 
     private final RestClient restClient;
@@ -38,6 +39,7 @@ public class TokenService {
         this.PAYPAL_CLIENT_ID = this.dotenv.get("PAYPAL_CLIENT_ID");
         this.PAYPAL_CLIENT_SECRET = this.dotenv.get("PAYPAL_CLIENT_SECRET");
         this.PAYPAL_MERCHANT_ID = this.dotenv.get("PAYPAL_MERCHANT_ID");
+        this.PAYPAL_BN_CODE = this.dotenv.get("PAYPAL_BN_CODE");
         this.DOMAINS = this.dotenv.get("DOMAINS");
 
         String auth = this.PAYPAL_CLIENT_ID + ":" + this.PAYPAL_CLIENT_SECRET;
@@ -58,7 +60,7 @@ public class TokenService {
         }
 
         if (tokenType == TokenType.ACCESS_TOKEN && hasMerchantId) {
-            client.header("PayPal-Partner-Attribution-ID", this.PAYPAL_MERCHANT_ID);
+            client.header("PayPal-Partner-Attribution-ID", this.PAYPAL_BN_CODE);
         }
 
         ResponseEntity<Map> result = client

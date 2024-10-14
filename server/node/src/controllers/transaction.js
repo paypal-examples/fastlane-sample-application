@@ -5,6 +5,7 @@ const {
   PAYPAL_CLIENT_ID,
   PAYPAL_CLIENT_SECRET,
   PAYPAL_MERCHANT_ID,
+  PAYPAL_BN_CODE,
 } = process.env;
 
 export async function getAccessToken() {
@@ -21,7 +22,7 @@ export async function getAccessToken() {
   headers.append('Authorization', `Basic ${auth}`);
   headers.append('Content-Type', 'application/x-www-form-urlencoded');
   if (PAYPAL_MERCHANT_ID) {
-    headers.append('PayPal-Partner-Attribution-ID', PAYPAL_MERCHANT_ID);
+    headers.append('PayPal-Partner-Attribution-ID', PAYPAL_BN_CODE);
     headers.append(
       'PayPal-Auth-Assertion',
       getAuthAssertionToken(PAYPAL_CLIENT_ID, PAYPAL_MERCHANT_ID),

@@ -10,6 +10,7 @@ public class TransactionPaypalController : Controller
     private static readonly string _paypalClientId = Environment.GetEnvironmentVariable("PAYPAL_CLIENT_ID") ?? "";
     private static readonly string _paypalClientSecret = Environment.GetEnvironmentVariable("PAYPAL_CLIENT_SECRET") ?? "";
     private static readonly string _paypalMerchantId = Environment.GetEnvironmentVariable("PAYPAL_MERCHANT_ID") ?? "";
+    private static readonly string _paypalBnCode = Environment.GetEnvironmentVariable("PAYPAL_BN_CODE") ?? "";
     private readonly IHttpClientFactory _httpClientFactory;
     public TransactionPaypalController(IHttpClientFactory httpClientFactory)
     {
@@ -110,7 +111,7 @@ public class TransactionPaypalController : Controller
 
         if (!string.IsNullOrEmpty(_paypalMerchantId))
         {
-            request.Headers.Add("PayPal-Partner-Attribution-ID", _paypalMerchantId);
+            request.Headers.Add("PayPal-Partner-Attribution-ID", _paypalBnCode);
             var authAssertionToken = Auth.GetAuthAssertionToken(_paypalClientId, _paypalMerchantId);
             request.Headers.Add("PayPal-Auth-Assertion", authAssertionToken);
         }

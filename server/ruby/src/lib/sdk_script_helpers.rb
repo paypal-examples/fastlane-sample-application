@@ -80,7 +80,7 @@ def get_access_token
   }
 
   if ENV['PAYPAL_MERCHANT_ID']
-    headers['PayPal-Partner-Attribution-ID'] = ENV['PAYPAL_MERCHANT_ID']
+    headers['PayPal-Partner-Attribution-ID'] = ENV['PAYPAL_BN_CODE']
     headers['PayPal-Auth-Assertion'] = get_auth_assertion_token(ENV['PAYPAL_CLIENT_ID'], ENV['PAYPAL_MERCHANT_ID'])
   end
 

@@ -26,7 +26,8 @@
         <fieldset class="email-input-with-watermark">
           <div class="email-container">
             <div class="form-group">
-              <input id="email-input" name="email" type="email" autocomplete="email" placeholder="E-mail" />
+              <input required id="email-input" maxlength="255" name="email" type="email" placeholder="Email"
+                autocomplete="email" />
               <label for="email-input" class="label">E-mail</label>
             </div>
             <button id="email-submit-button" type="button" class="submit-button" disabled>
@@ -58,29 +59,33 @@
         </span>
         <div class="form-row">
           <div class="form-group">
-            <input id="given-name" name="given-name" autocomplete="given-name" placeholder="First Name" />
+            <input required id="given-name" maxlength="255" name="given-name" autocomplete="given-name"
+              placeholder="First Name" />
             <label for="given-name" class="label">First Name</label>
           </div>
           <div class="form-group">
-            <input id="family-name" name="family-name" autocomplete="family-name" placeholder="Last Name" />
+            <input required id="family-name" maxlength="255" name="family-name" autocomplete="family-name"
+              placeholder="Last Name" />
             <label for="family-name" class="label">Last Name</label>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <input id="company" name="company" autocomplete="organization" placeholder="Company name (optional)" />
+            <input id="company" name="company" maxlength="255" autocomplete="organization"
+              placeholder="Company name (optional)" />
             <label for="company" class="label">Company name (optional)</label>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <input id="address-line1" name="address-line1" autocomplete="address-line1" placeholder="Address Line 1" />
+            <input required id="address-line1" maxlength="255" name="address-line1" autocomplete="address-line1"
+              placeholder="Address Line 1" />
             <label for="address-line1" class="label">Address Line 1</label>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <input id="address-line2" name="address-line2" autocomplete="address-line2"
+            <input id="address-line2" maxlength="255" name="address-line2" autocomplete="address-line2"
               placeholder="Apt., ste., bldg. (optional)" />
             <label for="address-line2" class="label">
               Apt., ste, bldg. (optional)
@@ -89,28 +94,36 @@
         </div>
         <div class="form-row">
           <div class="form-group">
-            <input id="address-level2" name="address-level2" autocomplete="address-level2" placeholder="City" />
+            <input required id="address-level2" maxlength="255" name="address-level2" autocomplete="address-level2"
+              placeholder="City" />
             <label for="address-level2" class="label">City</label>
           </div>
 
           <div class="form-group">
-            <input id="address-level1" name="address-level1" autocomplete="address-level1" placeholder="State" />
+            <input required id="address-level1" maxlength="255" name="address-level1" autocomplete="address-level1"
+              placeholder="State" />
             <label for="address-level1" class="label">State</label>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <input id="postal-code" name="postal-code" autocomplete="postal-code" placeholder="ZIP Code" />
+            <input required pattern="\d{5}(-\d{4})?"
+              title="The ZIP code must have the one of the following formats: 12345 or 12345-6789" id="postal-code"
+              name="postal-code" autocomplete="postal-code" placeholder="ZIP Code" />
             <label for="postal-code" class="label">ZIP Code</label>
           </div>
           <div class="form-group">
-            <input id="country" name="country" autocomplete="country" placeholder="Country (eg. US, UK)" />
+            <input required pattern="US" minlength="2" maxlength="2" title="Currently only available to the US"
+              id="country" name="country" autocomplete="country" placeholder="Country (eg. US, UK)" />
             <label for="country" class="label">Country (eg. US, UK)</label>
           </div>
         </div>
         <div class="form-row">
           <div class="form-group">
-            <input id="tel-country-code" name="tel-country-code" autocomplete="tel-country-code"
+            <input 
+              pattern="([0-9]{1,3})?" 
+              title="Please enter a valid country calling code with 1 to 3 digits" minlength="1"
+              maxlength="3" id="tel-country-code" name="tel-country-code" autocomplete="tel-country-code"
               placeholder="Country calling code" />
             <label for="tel-country-code" class="label">
               Country calling code
@@ -118,8 +131,10 @@
           </div>
 
           <div class="form-group">
-            <input id="tel-national" name="tel-national" type="tel" autocomplete="tel-national"
-              placeholder="Phone Number" />
+            <input 
+              pattern="([0-9]{10})?" 
+              title="Please enter a valid US phone number like (123) 456-7890, type only numbers"
+              id="tel-national" name="tel-national" type="tel" autocomplete="tel-national" placeholder="Phone Number" />
             <label for="tel-national" class="label">Phone Number</label>
           </div>
         </div>

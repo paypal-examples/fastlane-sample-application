@@ -12,6 +12,7 @@ PAYPAL_API_BASE_URL = os.getenv(
 PAYPAL_CLIENT_ID = os.getenv("PAYPAL_CLIENT_ID")
 PAYPAL_CLIENT_SECRET = os.getenv("PAYPAL_CLIENT_SECRET")
 PAYPAL_MERCHANT_ID = os.getenv("PAYPAL_MERCHANT_ID")
+PAYPAL_BN_CODE = os.getenv("PAYPAL_BN_CODE")
 
 
 def get_client_token():
@@ -21,7 +22,7 @@ def get_client_token():
         headers = {"Content-Type": "application/x-www-form-urlencoded"}
 
         if PAYPAL_MERCHANT_ID:
-            headers["PayPal-Partner-Attribution-ID"] = PAYPAL_MERCHANT_ID
+            headers["PayPal-Partner-Attribution-ID"] = PAYPAL_BN_CODE
             headers["PayPal-Auth-Assertion"] = get_auth_assertion_token(
                 PAYPAL_CLIENT_ID, PAYPAL_MERCHANT_ID
             )

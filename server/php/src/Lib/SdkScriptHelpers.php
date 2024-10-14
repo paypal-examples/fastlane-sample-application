@@ -90,7 +90,7 @@ class SdkScriptHelpers
 
         if (Env::get("PAYPAL_MERCHANT_ID")) {
             $headers["PayPal-Partner-Attribution-ID"] = Env::get(
-                "PAYPAL_MERCHANT_ID"
+                "PAYPAL_BN_CODE"
             );
             $headers["PayPal-Auth-Assertion"] = Auth::getAuthAssertionToken(
                 Env::get("PAYPAL_CLIENT_ID"),
