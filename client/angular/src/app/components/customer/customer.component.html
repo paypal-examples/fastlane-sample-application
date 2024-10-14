@@ -11,8 +11,9 @@
     <fieldset class="email-input-with-watermark">
       <div class="email-container">
         <div class="form-group">
-          <input id="email-input" [formControl]="email" (keydown.enter)="$event.preventDefault()" name="email"
-            type="email" placeholder="Email" autocomplete="email" />
+          <input #emailInputElement required [ngClass]="{'input-invalid': email.invalid && customerFormInvalid }"
+            id="email-input" [formControl]="email" (keydown.enter)="$event.preventDefault()" name="email" type="email"
+            placeholder="Email" autocomplete="email" />
           <label for="email-input" class="label">E-mail</label>
         </div>
         <button (click)="onContinueButtonClick($event)" id="email-submit-button" type="button" class="submit-button"

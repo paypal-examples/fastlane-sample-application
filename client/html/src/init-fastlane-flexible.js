@@ -136,6 +136,35 @@ async function initFastlane() {
         : '';
     };
 
+    const validateFields = (form, fields = []) => {
+      if (fields.length <= 0) return true;
+
+      let valid = true;
+      const invalidFields = [];
+
+      for (let i = 0; i < fields.length; i++) {
+        const currentFieldName = fields[i];
+        const currentFieldElement = form.elements[currentFieldName];
+        const isCurrentFieldValid = currentFieldElement.checkValidity();
+
+        if (!isCurrentFieldValid) {
+          valid = false;
+          invalidFields.push(currentFieldName);
+          currentFieldElement.classList.add('input-invalid');
+          continue;
+        }
+
+        currentFieldElement.classList.remove('input-invalid');
+      }
+
+      if (invalidFields.length > 0) {
+        const [firstInvalidField] = invalidFields;
+        form.elements[firstInvalidField].reportValidity();
+      }
+
+      return valid;
+    };
+
     /**
      * ######################################################################
      * Checkout form interactable elements
@@ -145,6 +174,13 @@ async function initFastlane() {
      */
 
     emailSubmitButton.addEventListener('click', async () => {
+      // Checks if email is empty or in a invalid format
+      const isEmailValid = validateFields(form, ['email']);
+
+      if (!isEmailValid) {
+        return;
+      }
+
       // disable button until authentication succeeds or fails
       emailSubmitButton.setAttribute('disabled', '');
 
@@ -233,6 +269,35 @@ async function initFastlane() {
     document
       .getElementById('shipping-submit-button')
       .addEventListener('click', () => {
+        const isShippingRequired = form.elements['shipping-required'].checked;
+
+        if (!isShippingRequired) {
+          const nextSection = memberHasSavedPaymentMethods
+            ? paymentSection
+            : billingSection;
+          shippingAddress = undefined;
+          setActiveSection(nextSection);
+          setShippingSummary({});
+          return;
+        }
+
+        // validate form values
+        const isShippingFormValid = validateFields(form, [
+          'given-name',
+          'family-name',
+          'shipping-address-line1',
+          'shipping-address-level2',
+          'shipping-address-level1',
+          'shipping-postal-code',
+          'shipping-country',
+          'tel-country-code',
+          'tel-national',
+        ]);
+
+        if (!isShippingFormValid) {
+          return;
+        }
+
         // extract form values
         const firstName = form.elements['given-name'].value;
         const lastName = form.elements['family-name'].value;
@@ -301,6 +366,19 @@ async function initFastlane() {
     document
       .getElementById('billing-submit-button')
       .addEventListener('click', () => {
+        // validate form values
+        const isBillingFormValid = validateFields(form, [
+          'billing-address-line1',
+          'billing-address-level2',
+          'billing-address-level1',
+          'billing-postal-code',
+          'billing-country',
+        ]);
+
+        if (!isBillingFormValid) {
+          return;
+        }
+
         // extract form values
         const addressLine1 = form.elements['billing-address-line1'].value;
         const addressLine2 = form.elements['billing-address-line2'].value;

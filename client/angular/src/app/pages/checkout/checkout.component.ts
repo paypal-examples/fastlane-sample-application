@@ -168,6 +168,12 @@ export class CheckoutComponent implements OnInit {
 
     public onShippingChange(nextShipping: ShippingAddressData): void {
         this.currentCustomer.shippingAddress = nextShipping;
+
+        if (!nextShipping) {
+            this.setActiveSection(Section.Payment);
+            return;
+        }
+        
         this.fastlanePaymentComponent.setShippingAddress(this.currentCustomer.shippingAddress);
         this.setActiveSection(Section.Payment);
     }

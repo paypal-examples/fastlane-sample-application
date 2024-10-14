@@ -1,7 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ShippingAddressData } from '../shipping/shipping.component';
 import { BillingAddressData } from '../billing/billing.component';
+import { ComponentFormState } from 'src/app/interfaces/types';
 
 export interface CustomerResponse {
   authenticated: boolean;
@@ -18,6 +19,9 @@ export interface CustomerResponse {
   styleUrls: ['../../app.component.css']
 })
 export class CustomerComponent implements OnInit {
+
+  @ViewChild('emailInputElement')
+  public emailInputElement!: ElementRef<HTMLInputElement>;
 
   @Input()
   public watermarkComponent: { render: Function } = {
@@ -54,10 +58,16 @@ export class CustomerComponent implements OnInit {
 
   public isContinueButtonEnabled = false;
 
+  public customerFormState = ComponentFormState.Valid;
+
   private _isActive = false;
 
   public get isActive(): boolean {
     return this._isActive;
+  }
+
+  public get customerFormInvalid(): boolean {
+    return this.customerFormState === ComponentFormState.Invalid;
   }
 
   public ngOnInit(): void {
@@ -70,6 +80,12 @@ export class CustomerComponent implements OnInit {
 
   public async onContinueButtonClick(event: Event): Promise<void> {
     event.preventDefault();
+
+    if (!this.email.valid) {
+      this.customerFormState = ComponentFormState.Invalid;
+      this.emailInputElement.nativeElement.reportValidity();
+      return;
+    }
 
     this.isContinueButtonEnabled = false;
 
@@ -112,6 +128,7 @@ export class CustomerComponent implements OnInit {
         paymentToken
       });
 
+      this.customerFormState = ComponentFormState.Valid;
     } finally {
       this.isContinueButtonEnabled = true;
     }

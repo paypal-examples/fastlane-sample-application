@@ -1,5 +1,6 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { ComponentFormState } from 'src/app/interfaces/types';
 
 export interface ShippingAddressData {
     companyName: string;
@@ -28,6 +29,9 @@ export interface ShippingAddressData {
     styleUrls: ['../../app.component.css']
 })
 export class ShippingComponent {
+
+    @ViewChild("shippingFormElement")
+    public shippingFormElement!: ElementRef<HTMLFormElement>;
 
     @Input()
     public isAuthenticated = false;
@@ -62,9 +66,17 @@ export class ShippingComponent {
     @Output()
     public shippingChangeEvent = new EventEmitter<ShippingAddressData>();
 
+    public shippingFormState = ComponentFormState.Valid;
+
     public get getAddressSummary(): string {
         return this.formatAddressSummary(this.shippingAddressData);
     }
+
+    public get shippingFormInvalid(): boolean {
+        return this.shippingFormState === ComponentFormState.Invalid;
+    }
+
+    public shippingRequired = new FormControl(true);
 
     public shippingForm = new FormGroup({
         firstName: new FormControl(""),
@@ -87,6 +99,18 @@ export class ShippingComponent {
     private _shippingAddressData: ShippingAddressData | undefined;
 
     public onContinueButtonClick(): void {
+
+        if (!this.shippingRequired.value) {
+            this.shippingChangeEvent.emit(undefined);
+            return;
+        }
+
+        if (!this.shippingForm.valid) {
+            this.shippingFormState = ComponentFormState.Invalid;
+            this.shippingFormElement.nativeElement.reportValidity();
+            return;
+        }
+
         const form = this.shippingForm.value;
 
         const shippingData: ShippingAddressData = {
@@ -113,6 +137,8 @@ export class ShippingComponent {
         this.shippingAddressData = shippingData;
 
         this.shippingChangeEvent.emit(shippingData);
+
+        this.shippingFormState = ComponentFormState.Valid;
     }
 
     public updateShippingForm(shippingData: ShippingAddressData | undefined) {

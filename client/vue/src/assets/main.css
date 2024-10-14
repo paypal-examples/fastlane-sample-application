@@ -273,3 +273,8 @@ section:not(.visited) .edit-button {
   min-height: 24px;
   margin-right: 155px;
 }
+
+.input-invalid {
+  border: 1.5px solid #e00034;
+  outline: 0.125rem solid #f5093e;
+}

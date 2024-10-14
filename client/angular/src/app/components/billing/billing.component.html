@@ -22,18 +22,23 @@
         }}</span><br />
     </ng-container>
   </div>
-  <form [formGroup]="billingForm" style="padding: 0">
+  <form [formGroup]="billingForm" #billingFormElement style="padding: 0">
     <fieldset>
       <div class="form-row">
         <div class="form-group">
-          <input formControlName="streetAddress" id="address-line1" name="billing-address-line1"
+          <input 
+            required maxlength="255"
+            formControlName="streetAddress" 
+            [ngClass]="{'input-invalid': billingForm.get('streetAddress')?.invalid && billingFormInvalid }"
+            id="address-line1" name="billing-address-line1"
             placeholder="Street address" autocomplete="address-line1" />
           <label for="address-line1" class="label">Address Line 1</label>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <input formControlName="extendedAddress" id="billing-address-line2" name="billing-address-line2"
+          <input 
+            maxlength="255" formControlName="extendedAddress" id="billing-address-line2" name="billing-address-line2"
             placeholder="Apt., ste., bldg. (optional)" autocomplete="address-line2" />
           <label for="billing-address-line2" class="label">
             Apt., ste, bldg. (optional)
@@ -42,24 +47,40 @@
       </div>
       <div class="form-row">
         <div class="form-group">
-          <input formControlName="locality" id="billing-address-level2" name="billing-address-level2" placeholder="City"
+          <input 
+            required 
+            [ngClass]="{'input-invalid': billingForm.get('locality')?.invalid && billingFormInvalid }"
+            maxlength="255"
+            formControlName="locality" id="billing-address-level2" name="billing-address-level2" placeholder="City"
             autocomplete="address-level2" />
           <label for="billing-address-level2" class="label">City</label>
         </div>
         <div class="form-group">
-          <input formControlName="region" id="billing-address-level1" name="billing-address-level1" placeholder="State"
+          <input 
+            required 
+            [ngClass]="{'input-invalid': billingForm.get('region')?.invalid && billingFormInvalid }"
+            maxlength="255"
+            formControlName="region" id="billing-address-level1" name="billing-address-level1" placeholder="State"
             autocomplete="address-level1" />
           <label for="billing-address-level1" class="label">State</label>
         </div>
       </div>
       <div class="form-row">
         <div class="form-group">
-          <input formControlName="postalCode" id="billing-postal-code" name="billing-postal-code" placeholder="ZIP code"
+          <input 
+            required pattern="\d{5}(-\d{4})?"
+            [ngClass]="{'input-invalid': billingForm.get('postalCode')?.invalid && billingFormInvalid }"
+            title="The ZIP code must have the one of the following formats: 12345 or 12345-6789"
+            formControlName="postalCode" id="billing-postal-code" name="billing-postal-code" placeholder="ZIP code"
             autocomplete="postal-code" />
           <label for="billing-postal-code" class="label">ZIP Code</label>
         </div>
         <div class="form-group">
-          <input formControlName="countryCodeAlpha2" id="billing-country" name="billing-country" placeholder="Country"
+          <input 
+            required 
+            [ngClass]="{'input-invalid': billingForm.get('countryCodeAlpha2')?.invalid && billingFormInvalid }"
+            pattern="US" minlength="2" maxlength="2" title="Currently only available to the US"
+            formControlName="countryCodeAlpha2" id="billing-country" name="billing-country" placeholder="Country"
             autocomplete="country" />
           <label for="billing-country" class="label">
             Country (eg. US, UK)

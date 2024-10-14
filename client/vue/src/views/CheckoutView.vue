@@ -1,6 +1,7 @@
 <script setup>
 import { useScript } from '@unhead/vue';
 import { onMounted, ref } from 'vue';
+import { validateFields } from '../utils/form';
 
 onMounted(async () => {
   await initialize();
@@ -11,6 +12,7 @@ const addressSummary = ref('');
 const shippingAddressForm = ref({});
 const isShippingRequired = ref(true);
 const isDisabled = ref(false);
+const checkoutForm = ref(null);
 
 let name;
 let deviceData;
@@ -67,6 +69,14 @@ async function initialize() {
 }
 
 async function lookupEmailProfile() {
+  
+  // Checks if email is empty or in a invalid format
+  const isEmailValid = validateFields(checkoutForm.value, ['email']);
+  
+  if (!isEmailValid) {
+    return;
+  }
+  
   shippingAddress = undefined;
   paymentToken = undefined;
   shippingAddressForm.value = {};
@@ -139,6 +149,30 @@ async function handleEditShipping() {
 }
 
 async function submitShippingAddress() {
+  
+  if (!isShippingRequired.value) {
+    shippingAddress = undefined;
+    activeSection.value = 'payment';
+    addressSummary.value = getAddressSummary({});
+    return;
+  }
+  
+  const isShippingFormValid = validateFields(checkoutForm.value, [
+    'given-name',
+    'family-name',
+    'address-line1',
+    'address-level2',
+    'address-level1',
+    'postal-code',
+    'country',
+    'tel-country-code',
+    'tel-national',
+  ]);
+  
+  if (!isShippingFormValid) {
+    return;
+  }
+  
   const {
     firstName,
     lastName,
@@ -269,7 +303,7 @@ function getAddressSummary({
 </script>
 
 <template>
-  <form @submit.prevent="() => null">
+  <form ref="checkoutForm" @submit.prevent="() => null">
     <h1>Fastlane - PayPal Integration</h1>
     <section id="customer" :class="getSectionStatus('customer')">
       <div class="header">
@@ -291,6 +325,7 @@ function getAddressSummary({
             <div class="form-group">
               <input
                 required
+                maxlength="255"
                 name="email"
                 type="email"
                 placeholder="Email"
@@ -336,6 +371,7 @@ function getAddressSummary({
             id="shipping-required-checkbox"
             name="shipping-required"
             type="checkbox"
+            v-model="isShippingRequired"
             :checked="isShippingRequired"
           />
           <label for="shipping-required-checkbox">
@@ -345,6 +381,8 @@ function getAddressSummary({
         <div class="form-row">
           <div class="form-group">
             <input
+              required
+              maxlength="255"
               id="given-name"
               name="given-name"
               autocomplete="given-name"
@@ -355,6 +393,8 @@ function getAddressSummary({
           </div>
           <div class="form-group">
             <input
+              required
+              maxlength="255"
               id="family-name"
               name="family-name"
               autocomplete="family-name"
@@ -367,6 +407,7 @@ function getAddressSummary({
         <div class="form-row">
           <div class="form-group">
             <input
+              maxlength="255"
               id="company"
               name="company"
               autocomplete="organization"
@@ -379,6 +420,8 @@ function getAddressSummary({
         <div class="form-row">
           <div class="form-group">
             <input
+              required
+              maxlength="255"
               id="address-line1"
               name="address-line1"
               autocomplete="address-line1"
@@ -391,6 +434,7 @@ function getAddressSummary({
         <div class="form-row">
           <div class="form-group">
             <input
+              maxlength="255"
               id="address-line2"
               name="address-line2"
               autocomplete="address-line2"
@@ -405,6 +449,8 @@ function getAddressSummary({
         <div class="form-row">
           <div class="form-group">
             <input
+              required
+              maxlength="255"
               id="address-level2"
               name="address-level2"
               autocomplete="address-level2"
@@ -416,6 +462,8 @@ function getAddressSummary({
 
           <div class="form-group">
             <input
+              required
+              maxlength="255"
               id="address-level1"
               name="address-level1"
               autocomplete="address-level1"
@@ -428,6 +476,9 @@ function getAddressSummary({
         <div class="form-row">
           <div class="form-group">
             <input
+              required 
+              pattern="\d{5}(-\d{4})?"
+              title="The ZIP code must have the one of the following formats: 12345 or 12345-6789"
               id="postal-code"
               name="postal-code"
               autocomplete="postal-code"
@@ -438,6 +489,10 @@ function getAddressSummary({
           </div>
           <div class="form-group">
             <input
+              required pattern="US" 
+              minlength="2" 
+              maxlength="2" 
+              title="Currently only available to the US"
               id="country"
               name="country"
               autocomplete="country"
@@ -450,6 +505,10 @@ function getAddressSummary({
         <div class="form-row">
           <div class="form-group">
             <input
+              pattern="([0-9]{1,3})?" 
+              title="Please enter a valid country calling code with 1 to 3 digits" 
+              minlength="1"
+              maxlength="3"
               id="tel-country-code"
               name="tel-country-code"
               autocomplete="tel-country-code"
@@ -462,6 +521,8 @@ function getAddressSummary({
 
           <div class="form-group">
             <input
+              pattern="([0-9]{10})?" 
+              title="Please enter a valid US phone number like (123) 456-7890, type only numbers"
               id="tel-national"
               name="tel-national"
               type="tel"
