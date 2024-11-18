@@ -32,6 +32,7 @@ export class CheckoutFlexibleComponent implements OnInit {
     public fastlaneIdentity: any;
     public fastlaneCardComponent: any;
     public fastlaneWatermarkComponent: any;
+    public fastlanePaymentWatermarkComponent: any;
 
     public currentCustomer: CustomerResponse = {
         authenticated: false,
@@ -79,7 +80,10 @@ export class CheckoutFlexibleComponent implements OnInit {
             this.fastlaneIdentity = identity;
             this.fastlaneProfile = profile;
             this.fastlaneCardComponent = await FastlaneCardComponent();
-            this.fastlaneWatermarkComponent = await FastlaneWatermarkComponent();
+            this.fastlanePaymentWatermarkComponent = await FastlaneWatermarkComponent({ includeAdditionalInfo: false });
+            this.fastlaneWatermarkComponent = await FastlaneWatermarkComponent({
+                includeAdditionalInfo: true
+            });
         });
     }
 
@@ -152,7 +156,7 @@ export class CheckoutFlexibleComponent implements OnInit {
         this.resetPaymentSection();
 
         if (this.currentCustomer.paymentToken) {
-            this.fastlaneWatermarkComponent.render('#payment-watermark');
+            this.fastlanePaymentWatermarkComponent.render('#payment-watermark');
         } else {
             this.fastlaneCardComponent.render('#card-component');
         }

@@ -76,7 +76,9 @@ export class CheckoutComponent implements OnInit {
             this.fastlaneIdentity = identity;
             this.fastlaneProfile = profile;
             this.fastlanePaymentComponent = await FastlanePaymentComponent();
-            this.fastlaneWatermarkComponent = await FastlaneWatermarkComponent();
+            this.fastlaneWatermarkComponent = await FastlaneWatermarkComponent({
+                includeAdditionalInfo: true
+            });
         });
     }
 

@@ -1,23 +1,22 @@
 <?php
 
-use App\Controller\CheckoutController;
-use App\Controller\TransactionController;
+use App\Controller\ServerController;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return function (RoutingConfigurator $routes): void {
     $routes
         ->add("getCheckout", "/")
-        ->controller([CheckoutController::class, "index"]);
+        ->controller([ServerController::class, "index"]);
 
     $routes
         ->add("createTransaction", "/transaction")
-        ->controller([TransactionController::class, "createTransaction"]);
+        ->controller([ServerController::class, "createTransaction"]);
 
     $routes
         ->add("getSdkUrl", "/sdk/url")
-        ->controller([CheckoutController::class, "getSDKUrl"]);
+        ->controller([ServerController::class, "getSDKUrl"]);
 
     $routes
         ->add("getClientToken", "/sdk/client-token")
-        ->controller([CheckoutController::class, "getClientToken"]);
+        ->controller([ServerController::class, "getClientToken"]);
 };

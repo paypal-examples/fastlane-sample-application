@@ -68,7 +68,7 @@ async function initialize() {
     }));
 
   cardComponent = await FastlaneCardComponent();
-  paymentWatermark = await FastlaneWatermarkComponent();
+  paymentWatermark = await FastlaneWatermarkComponent({ includeAdditionalInfo: false });
 
   watermarkComponent = await FastlaneWatermarkComponent({
     includeAdditionalInfo: true,

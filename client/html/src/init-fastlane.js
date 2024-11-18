@@ -1,10 +1,8 @@
 async function initFastlane() {
   try {
-    /**
-     * ######################################################################
+    /* ######################################################################
      * Initialize Fastlane components
-     * ######################################################################
-     */
+     * ###################################################################### */
 
     if (!window.paypal.Fastlane) {
       throw new Error('PayPal script loaded but no Fastlane module');
@@ -51,24 +49,20 @@ async function initFastlane() {
       })
     ).render('#watermark-container');
 
-    /**
-     * ######################################################################
+    /* ######################################################################
      * State & data required for Fastlane
-     * ######################################################################
-     */
+     * ###################################################################### */
 
     let memberAuthenticatedSuccessfully;
     let email;
     let shippingAddress;
     let paymentToken;
 
-    /**
-     * ######################################################################
+    /* ######################################################################
      * Checkout form helpers
      * (this will be different for individual websites and will depend on how
      * your own checkout flow functions)
-     * ######################################################################
-     */
+     * ###################################################################### */
 
     const form = document.querySelector('form');
     const customerSection = document.getElementById('customer');
@@ -148,13 +142,11 @@ async function initFastlane() {
       return valid;
     };
 
-    /**
-     * ######################################################################
+    /* ######################################################################
      * Checkout form interactable elements
      * (this will be different for individual websites and will depend on how
      * your own checkout flow functions)
-     * ######################################################################
-     */
+     * ###################################################################### */
 
     emailSubmitButton.addEventListener('click', async () => {
       // Checks if email is empty or in a invalid format
