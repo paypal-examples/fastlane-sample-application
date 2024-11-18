@@ -46,5 +46,5 @@
         }
     },
     "postCreateCommand": "chmod +x .devcontainer/update_settings.sh && .devcontainer/update_settings.sh && cd server/python && python -m venv .venv && . .venv/bin/activate && pip install --upgrade pip && pip install -r requirements.txt",
-    "postAttachCommand": "cd server/python && . .venv/bin/activate && python app.py"
+    "postAttachCommand": "cd server/python && . .venv/bin/activate && python server.py"
 }
